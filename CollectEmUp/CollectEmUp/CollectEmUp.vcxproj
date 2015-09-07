@@ -11,22 +11,36 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="DirectLightSource.cpp" />
     <ClCompile Include="DispatcherCallbackMap.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventDispatcher.cpp" />
+    <ClCompile Include="FixedObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameEvent.cpp" />
     <ClCompile Include="GameException.h" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PhysicsObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Callback.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="DirectLightSource.h" />
     <ClInclude Include="DispatcherCallbackMap.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventDispatcher.h" />
+    <ClInclude Include="FixedObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameEvent.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="IEventDispatcher.h" />
+    <ClInclude Include="IImportData.h" />
+    <ClInclude Include="IImporter.h" />
+    <ClInclude Include="LightSource.h" />
+    <ClInclude Include="PhysicsObject.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2A4717AC-E242-48F8-82A7-F2912667BDF1}</ProjectGuid>

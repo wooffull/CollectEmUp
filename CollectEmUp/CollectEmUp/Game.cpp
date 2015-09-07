@@ -35,10 +35,10 @@ Game::Game( const char* name, int width, int height ) :
 		throw GameException::GlewInitFail;
 	}
 	
+	// Add event listener to self for when the game closes
 	Callback c = std::bind( &Game::onClose, this, std::placeholders::_1 );
 	this->addEventListener( GameEvent::CLOSE, c );
 }
-
 
 Game::~Game()
 {
