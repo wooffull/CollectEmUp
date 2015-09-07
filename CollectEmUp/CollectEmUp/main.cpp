@@ -1,5 +1,6 @@
 /* CollectEmUp Game © 2015
-Created for IGME - 309 Data Structures and Algorithms for Games and Simulation II
+Created for:
+IGME - 309 Data Structures and Algorithms for Games and Simulation II
 
 Team Members:
 Norman Greenberg: Team Manager/Design
@@ -13,43 +14,39 @@ Matthew Fasman: Engine Developer
 Ryan Mignini : Engine Developer
 Hector Piñeiro: Engine Developer
 
-This main.cpp is just to get OpenGL set up as it is can have the most difficulties
-For the future we should begin to separate out different elements into their own methods and classes
+This main.cpp is just to get OpenGL set up as it is can have the most
+difficulties. For the future we should begin to separate out different
+elements into their own methods and classes.
 
-I have selected Visual Studos 2013 as it is what all of the lab machines have on them. I apologize if this causes an inconvenience initially.
+I have selected Visual Studos 2013 as it is what all of the lab machines have
+on them. I apologize if this causes an inconvenience initially.
 */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <glew.h>
-#include <glfw3.h>
+#include <iostream>
+#include "Game.h"
+#include "Event.h"
 
-int main(int argc, char* argv[])
+void onGameStart( Event e )
 {
-	if (!glfwInit())
-	{
-		return -1;
-	}
+	std::cout << "Game started" << std::endl;
+}
 
-	// Create a windowed mode window and its OpenGL context 
-	GLFWwindow* windowPtr = glfwCreateWindow(800, 800, "CollectEmUp", NULL, NULL);
-	if (!windowPtr)
-	{
-		glfwTerminate();
-		return -1;
-	}
+void onGameStop( Event e )
+{
+	std::cout << "Game stopped" << std::endl;
+}
 
-	glfwMakeContextCurrent(windowPtr);
+void onGameClose( Event e )
+{
+	std::cout << "Game closed" << std::endl;
+}
 
-	if (glewInit() != GLEW_OK) return false;
+int main( int argc, char* argv[] )
+{
+	Game game = Game( "CollectEmUp" );
+	game.addEventListener( GameEvent::START, onGameStart );
+	game.addEventListener( GameEvent::STOP, onGameStop );
+	game.addEventListener( GameEvent::CLOSE, onGameClose );
 
-	while (!glfwWindowShouldClose(windowPtr))
-	{
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		glfwSwapBuffers(windowPtr);
-		glfwPollEvents();
-	}
-
-	return 0;
+	game.start();
 }
