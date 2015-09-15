@@ -2,64 +2,74 @@
 
 Color::Color()
 {
-	_red = 0;
-	_green = 0;
-	_blue = 0;
-	_alpha = 255;
+	set( 0, 0, 0 );
 }
 
-Color::Color( unsigned r, unsigned g, unsigned b )
+Color::Color( float r, float g, float b )
 {
-	_red = r;
-	_green = g;
-	_blue = b;
-	_alpha = 255;
+	set( r, g, b );
 }
 
-Color::Color( unsigned r, unsigned g, unsigned b, unsigned a )
+Color::Color( float r, float g, float b, float a )
 {
-	_red = r;
-	_green = g;
-	_blue = b;
-	_alpha = a;
+	set( r, g, b, a );
 }
 
-Color::~Color()
-{
-}
-
-unsigned Color::getRed()
+float Color::getRed()
 {
 	return _red;
 }
-void Color::setRed( unsigned value )
+void Color::setRed( float value )
 {
-	_red = value;
+	_red = getValidValue( value );
 }
 
-unsigned Color::getGreen()
+float Color::getGreen()
 {
 	return _green;
 }
-void Color::setGreen( unsigned value )
+void Color::setGreen( float value )
 {
-	_green = value;
+	_green = getValidValue( value );
 }
 
-unsigned Color::getBlue()
+float Color::getBlue()
 {
 	return _blue;
 }
-void Color::setBlue( unsigned value )
+void Color::setBlue( float value )
 {
-	_blue = value;
+	_blue = getValidValue( value );
 }
 
-unsigned Color::getAlpha()
+float Color::getAlpha()
 {
 	return _alpha;
 }
-void Color::setAlpha( unsigned value )
+void Color::setAlpha( float value )
 {
-	_alpha = value;
+	_alpha = getValidValue( value );
+}
+
+void Color::set( Color c )
+{
+	setRed( c.getRed() );
+	setGreen( c.getGreen() );
+	setBlue( c.getBlue() );
+	setAlpha( c.getAlpha() );
+}
+void Color::set( float r, float g, float b, float a )
+{
+	setRed( r );
+	setGreen( g );
+	setBlue( b );
+	setAlpha( a );
+}
+
+/**
+ * Gets a value limited to the range 0 to 1
+ */
+float Color::getValidValue( float value )
+{
+	return std::max<float>( 0, std::min<float>( 1.0f, value ) );
 }

@@ -1,24 +1,20 @@
 #pragma once
 
-#include "FixedObject.h"
+#include "GameObject.h"
 #include "Color.h"
 
 class LightSource :
-	FixedObject
+	GameObject
 {
 public:
-	LightSource( float brightness = DEFAULT_BRIGHTNESS, Color color = DEFAULT_COLOR );
+	LightSource( float brightness = LightSource::DEFAULT_BRIGHTNESS, Color color = LightSource::DEFAULT_COLOR );
 	virtual ~LightSource();
 
 	float getBrightness();
 	void setBrightness( float value );
 
-	Color getColor();
-	void setColor( Color value );
-
 protected:
 	float _brightness;
-	Color _color;
 
 private:	
 	static const float& DEFAULT_BRIGHTNESS;

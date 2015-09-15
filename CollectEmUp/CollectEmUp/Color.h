@@ -1,29 +1,36 @@
 #pragma once
 
+#include <algorithm>
+
 class Color
 {
 public:
 	Color();
-	Color( unsigned r, unsigned g, unsigned b );
-	Color( unsigned r, unsigned g, unsigned b, unsigned a );
-	~Color();
+	Color( float r, float g, float b );
+	Color( float r, float g, float b, float a );
+	~Color() {}
 
-	unsigned getRed();
-	void setRed( unsigned value );
+	float getRed();
+	void setRed( float value );
 
-	unsigned getGreen();
-	void setGreen( unsigned value );
+	float getGreen();
+	void setGreen( float value );
 
-	unsigned getBlue();
-	void setBlue( unsigned value );
+	float getBlue();
+	void setBlue( float value );
 
-	unsigned getAlpha();
-	void setAlpha( unsigned value );
+	float getAlpha();
+	void setAlpha( float value );
+
+	void set( Color c );
+	void set( float r, float g, float b, float a = 1.0f );
 
 private:
-	unsigned _red;
-	unsigned _green;
-	unsigned _blue;
-	unsigned _alpha;
+	float _red;
+	float _green;
+	float _blue;
+	float _alpha;
+
+	float getValidValue( float value );
 };
 

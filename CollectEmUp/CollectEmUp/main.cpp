@@ -1,30 +1,11 @@
-/* CollectEmUp Game © 2015
-Created for:
-IGME - 309 Data Structures and Algorithms for Games and Simulation II
-
-Team Members:
-Norman Greenberg: Team Manager/Design
-Cathy Altenburger: Designer/Artist
-L.A. Stapleford: Designer/Artist
-Andrew Litfin: Designer
-Andrew Knowland: Designer
-
-Michael Lynch: Engine Lead
-Matthew Fasman: Engine Developer
-Ryan Mignini : Engine Developer
-Hector Piñeiro: Engine Developer
-
-This main.cpp is just to get OpenGL set up as it is can have the most
-difficulties. For the future we should begin to separate out different
-elements into their own methods and classes.
-
-I have selected Visual Studos 2013 as it is what all of the lab machines have
-on them. I apologize if this causes an inconvenience initially.
-*/
-
 #include <iostream>
+#include <glew.h>
+#include <glfw3.h>
 #include "Game.h"
 #include "Event.h"
+#include "GameScreen.h"
+
+Game* _game;
 
 void onGameStart( Event e )
 {
@@ -41,12 +22,31 @@ void onGameClose( Event e )
 	std::cout << "Game closed" << std::endl;
 }
 
+void onMouseButtonChange( GLFWwindow* windowPtr, int button, int action, int mods )
+{
+	_game->onMouseButtonChange( button, action, mods );
+}
+
+void onMouseMove( GLFWwindow* windowPtr, double x, double y )
+{
+	_game->onMouseMove( x, y );
+}
+
 int main( int argc, char* argv[] )
 {
-	Game game = Game( "CollectEmUp" );
-	game.addEventListener( GameEvent::START, onGameStart );
-	game.addEventListener( GameEvent::STOP, onGameStop );
-	game.addEventListener( GameEvent::CLOSE, onGameClose );
+	_game = new Game( "CollectEmUp" );
+	GameScreen* gameScreen = new GameScreen();
+	_game->setScreen( gameScreen );
+	_game->addEventListener( GameEvent::START, onGameStart );
+	_game->addEventListener( GameEvent::STOP, onGameStop );
+	_game->addEventListener( GameEvent::CLOSE, onGameClose );
 
-	game.start();
+	// Notify when a mouse button is pressed/ released or when the cursor moves
+	glfwSetMouseButtonCallback( _game->getWindow(), onMouseButtonChange );
+	glfwSetCursorPosCallback( _game->getWindow(), onMouseMove );
+
+	_game->start();
+
+	delete gameScreen;
+	delete _game;
 }

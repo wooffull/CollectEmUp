@@ -1,10 +1,10 @@
 #include "LightSource.h"
 
 const float& LightSource::DEFAULT_BRIGHTNESS = 1.0f;
-const Color& LightSource::DEFAULT_COLOR = Color(255, 255, 255);
+const Color& LightSource::DEFAULT_COLOR = Color( 1.0f, 1.0f, 1.0f );
 
 LightSource::LightSource( float brightness, Color color ) :
-	FixedObject()
+	GameObject()
 {
 	setBrightness( brightness );
 	setColor( color );
@@ -21,13 +21,4 @@ float LightSource::getBrightness()
 void LightSource::setBrightness( float value )
 {
 	_brightness = value;
-}
-
-Color LightSource::getColor()
-{
-	return _color;
-}
-void LightSource::setColor( Color value )
-{
-	_color = value;
 }

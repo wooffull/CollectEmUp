@@ -9,6 +9,6 @@ GameEvent::GameEvent( const std::string& name ) :
 {
 }
 
-GameEvent::~GameEvent(void)
+GameEvent::~GameEvent()
 {
 }

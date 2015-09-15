@@ -14,33 +14,44 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="DirectLightSource.cpp" />
     <ClCompile Include="DispatcherCallbackMap.cpp" />
+    <ClCompile Include="Environment.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventDispatcher.cpp" />
-    <ClCompile Include="FixedObject.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameEvent.cpp" />
     <ClCompile Include="GameException.h" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="PhysicsObject.cpp" />
+    <ClCompile Include="MouseEvent.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="ShaderHelper.cpp" />
+    <ClCompile Include="Shape.cpp" />
+    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Callback.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="DirectLightSource.h" />
     <ClInclude Include="DispatcherCallbackMap.h" />
+    <ClInclude Include="Environment.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventDispatcher.h" />
-    <ClInclude Include="FixedObject.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameScreen.h" />
     <ClInclude Include="IEventDispatcher.h" />
     <ClInclude Include="IImportData.h" />
     <ClInclude Include="IImporter.h" />
+    <ClInclude Include="IScreen.h" />
     <ClInclude Include="LightSource.h" />
-    <ClInclude Include="PhysicsObject.h" />
+    <ClInclude Include="MouseEvent.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="ShaderHelper.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2A4717AC-E242-48F8-82A7-F2912667BDF1}</ProjectGuid>

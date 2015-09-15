@@ -1,6 +1,9 @@
+#pragma once
+
 enum GameException
 {
 	GlfwInitFail,
 	GlfwCreateWindowFail,
-	GlewInitFail
+	GlewInitFail,
+	LoadShadersFail
 };
