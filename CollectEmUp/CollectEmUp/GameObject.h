@@ -7,7 +7,7 @@
 #include "ShaderHelper.h"
 #include "EventDispatcher.h"
 #include "Color.h"
-#include "Shape.h"
+#include "Model.h"
 
 class GameObject :
 	public EventDispatcher
@@ -66,8 +66,8 @@ public:
 	virtual GLuint getProgramIndex();
 	virtual void setProgramIndex( GLuint value );
 
-	virtual Shape* getShape();
-	virtual void setShape( Shape* value );
+	virtual Model* getModel();
+	virtual void setModel( Model* value );
 
 protected:
 	GameObject* _parent;
@@ -84,6 +84,9 @@ protected:
 	bool _fixed;
 	Color _color;
 	GLuint _programIndex;
-	Shape* _shape;
+	Model* _model;
+
+	GLint _offsetIndex;
+	GLint _scaleIndex;
 };
 

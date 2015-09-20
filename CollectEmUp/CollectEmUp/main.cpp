@@ -35,7 +35,9 @@ void onMouseMove( GLFWwindow* windowPtr, double x, double y )
 int main( int argc, char* argv[] )
 {
 	_game = new Game( "CollectEmUp" );
+
 	GameScreen* gameScreen = new GameScreen();
+
 	_game->setScreen( gameScreen );
 	_game->addEventListener( GameEvent::START, onGameStart );
 	_game->addEventListener( GameEvent::STOP, onGameStop );
@@ -44,6 +46,8 @@ int main( int argc, char* argv[] )
 	// Notify when a mouse button is pressed/ released or when the cursor moves
 	glfwSetMouseButtonCallback( _game->getWindow(), onMouseButtonChange );
 	glfwSetCursorPosCallback( _game->getWindow(), onMouseMove );
+
+	_game->setClearColor( Color( 0.5f, 1.0f, 0.8f ) );
 
 	_game->start();
 

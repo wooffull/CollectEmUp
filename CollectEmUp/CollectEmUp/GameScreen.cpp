@@ -2,7 +2,8 @@
 
 GameScreen::GameScreen()
 {
-	_programIndex = loadShaderProgram
+	ShaderImporter shaderImporter;
+	_programIndex = shaderImporter.loadShaderProgram
 	(
 		"Shaders/vertexShader.glsl",
 		"Shaders/fragmentShader.glsl"
@@ -31,12 +32,6 @@ GameScreen::~GameScreen()
 void GameScreen::update( float dt )
 {
 	GameObject::update( dt );
-
-	if( _mouseIsDown )
-	{
-		glm::vec2 velocity = _mouseDisplacement * 10.0f;
-		_environment->createTriangle( _mousePos, velocity );
-	}
 }
 
 void GameScreen::onMouseMove( MouseEvent e )

@@ -3,6 +3,7 @@
 #include "IScreen.h"
 #include "Environment.h"
 #include "GameException.h"
+#include "ShaderImporter.h"
 
 class GameScreen :
 	public IScreen

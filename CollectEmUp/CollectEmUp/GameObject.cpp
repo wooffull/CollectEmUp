@@ -17,7 +17,7 @@ GameObject::GameObject() :
 	_fixed = true;
 	_color = Color();
 	_programIndex = -1;
-	_shape = nullptr;
+	_model = nullptr;
 }
 
 GameObject::~GameObject()
@@ -93,15 +93,16 @@ void GameObject::drawShape()
 		_color.getBlue()
 	);
 
-	if( _shape != nullptr )
+	if( _model != nullptr )
 	{
 		glm::mat4 objMatrix =
 			translate( _position ) *
 			scale( _scale ) *
 			rotate( _rotation, _rotationAxis );
+		setShaderVec3( _programIndex, "scale", _scale );
 		setShaderMatrix( _programIndex, "objMatrix", objMatrix );
 
-		_shape->draw( 0, 0, _scale.x, _scale.y, _rotation );
+		_model->draw();
 	}
 }
 
@@ -291,10 +292,9 @@ void GameObject::setProgramIndex( GLuint value )
 {
 	_programIndex = value;
 
-	if( _shape != nullptr )
-	{
-		_shape->setProgramIndex( _programIndex );
-	}
+	// Get locations of uniform variables in the shader program
+	_offsetIndex = glGetUniformLocation( _programIndex, "offset" );
+	_scaleIndex = glGetUniformLocation( _programIndex, "scale" );
 
 	auto begin = _children->begin();
 	auto end = _children->end();
@@ -305,12 +305,11 @@ void GameObject::setProgramIndex( GLuint value )
 	}
 }
 
-Shape* GameObject::getShape()
+Model* GameObject::getModel()
 {
-	return _shape;
+	return _model;
 }
-void GameObject::setShape( Shape* value )
+void GameObject::setModel( Model* value )
 {
-	_shape = value;
-	_shape->setProgramIndex( _programIndex );
+	_model = value;
 }

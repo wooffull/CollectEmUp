@@ -1,12 +1,10 @@
 #pragma once
 
-#include "IImportData.h"
+#include "ImportData.h"
 
 class IImporter
 {
 public:
-	virtual ~IImporter() {}
-
-	virtual void import( IImportData data ) = 0;
+	virtual ImportData* loadFromFile( char* filePath ) = 0;
 };
 

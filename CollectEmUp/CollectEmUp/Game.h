@@ -16,11 +16,10 @@
 class Game :
 	public EventDispatcher
 {
-private:	
+public:
 	static const int& DEFAULT_WIDTH;
 	static const int& DEFAULT_HEIGHT;
 
-public:
 	Game( const char* name, int width = DEFAULT_WIDTH, int height = DEFAULT_HEIGHT );
 	~Game();
 

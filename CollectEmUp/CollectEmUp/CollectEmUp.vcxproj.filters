@@ -49,6 +49,18 @@
     <Filter Include="Source Files\Misc">
       <UniqueIdentifier>{5743630c-6d3a-4043-8201-84cf78d53350}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Util\ImportData">
+      <UniqueIdentifier>{5525a6c8-d61b-499a-9e4f-4aef119aedd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Util\Importers">
+      <UniqueIdentifier>{d74e8187-7c2d-43ed-8361-59896b0630d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util\ImportData">
+      <UniqueIdentifier>{0e4e9fec-ac7c-4bd6-8e80-dcc7aee23e27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util\Importers">
+      <UniqueIdentifier>{8dec594e-11e6-4c65-9b03-71a84c97b813}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Event.cpp">
@@ -84,9 +96,6 @@
     <ClCompile Include="LightSource.cpp">
       <Filter>Source Files\Display</Filter>
     </ClCompile>
-    <ClCompile Include="Shape.cpp">
-      <Filter>Source Files\Display</Filter>
-    </ClCompile>
     <ClCompile Include="MouseEvent.cpp">
       <Filter>Source Files\Event</Filter>
     </ClCompile>
@@ -102,8 +111,26 @@
     <ClCompile Include="GameScreen.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>Source Files\Misc</Filter>
+    <ClCompile Include="Model.cpp">
+      <Filter>Source Files\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="FileImportData.cpp">
+      <Filter>Source Files\Util\ImportData</Filter>
+    </ClCompile>
+    <ClCompile Include="ImportData.cpp">
+      <Filter>Source Files\Util\ImportData</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelImportData.cpp">
+      <Filter>Source Files\Util\ImportData</Filter>
+    </ClCompile>
+    <ClCompile Include="FileImporter.cpp">
+      <Filter>Source Files\Util\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelImporter.cpp">
+      <Filter>Source Files\Util\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderImporter.cpp">
+      <Filter>Source Files\Util\Importers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -131,12 +158,6 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="IImportData.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="IImporter.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
     <ClInclude Include="DirectLightSource.h">
       <Filter>Header Files\Display</Filter>
     </ClInclude>
@@ -147,9 +168,6 @@
       <Filter>Header Files\Display</Filter>
     </ClInclude>
     <ClInclude Include="IScreen.h">
-      <Filter>Header Files\Display</Filter>
-    </ClInclude>
-    <ClInclude Include="Shape.h">
       <Filter>Header Files\Display</Filter>
     </ClInclude>
     <ClInclude Include="MouseEvent.h">
@@ -167,8 +185,29 @@
     <ClInclude Include="GameScreen.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>Header Files\Misc</Filter>
+    <ClInclude Include="Model.h">
+      <Filter>Header Files\Display</Filter>
+    </ClInclude>
+    <ClInclude Include="IImporter.h">
+      <Filter>Header Files\Util\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileImportData.h">
+      <Filter>Header Files\Util\ImportData</Filter>
+    </ClInclude>
+    <ClInclude Include="ImportData.h">
+      <Filter>Header Files\Util\ImportData</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelImportData.h">
+      <Filter>Header Files\Util\ImportData</Filter>
+    </ClInclude>
+    <ClInclude Include="FileImporter.h">
+      <Filter>Header Files\Util\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelImporter.h">
+      <Filter>Header Files\Util\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderImporter.h">
+      <Filter>Header Files\Util\Importers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

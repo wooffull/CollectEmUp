@@ -17,18 +17,23 @@
     <ClCompile Include="Environment.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventDispatcher.cpp" />
+    <ClCompile Include="FileImportData.cpp" />
+    <ClCompile Include="FileImporter.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameEvent.cpp" />
     <ClCompile Include="GameException.h" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="ImportData.cpp" />
     <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelImportData.cpp" />
+    <ClCompile Include="ModelImporter.cpp" />
     <ClCompile Include="MouseEvent.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ShaderHelper.cpp" />
-    <ClCompile Include="Shape.cpp" />
-    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="ShaderImporter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Callback.h" />
@@ -38,20 +43,24 @@
     <ClInclude Include="Environment.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventDispatcher.h" />
+    <ClInclude Include="FileImportData.h" />
+    <ClInclude Include="FileImporter.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="IEventDispatcher.h" />
-    <ClInclude Include="IImportData.h" />
     <ClInclude Include="IImporter.h" />
+    <ClInclude Include="ImportData.h" />
     <ClInclude Include="IScreen.h" />
     <ClInclude Include="LightSource.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelImportData.h" />
+    <ClInclude Include="ModelImporter.h" />
     <ClInclude Include="MouseEvent.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="ShaderHelper.h" />
-    <ClInclude Include="Shape.h" />
-    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="ShaderImporter.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2A4717AC-E242-48F8-82A7-F2912667BDF1}</ProjectGuid>
