@@ -29,8 +29,8 @@ Environment::~Environment()
 
 void Environment::update( float dt )
 {
-	//applyGravity();
-	//applyDrag();
+	applyGravity();
+	applyDrag();
 
 	GameObject::update( dt );
 	
@@ -77,4 +77,17 @@ void Environment::onAdded( Event e )
 
 void Environment::onRemoved( Event e )
 {
+}
+
+void Environment::onMouseDown( MouseEvent e )
+{
+	glm::vec3 jump( 0, 0.5f, 0 );
+
+	auto begin = _children->begin();
+	auto end = _children->end();
+	for( std::vector<GameObject*>::iterator it = begin; it != end; ++it )
+	{
+		GameObject* curChild = *it;
+		curChild->addImpulse( jump );
+	}
 }

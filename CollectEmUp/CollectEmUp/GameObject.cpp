@@ -169,6 +169,11 @@ void GameObject::addForce( glm::vec3 force )
 	_acceleration += force / _mass;
 }
 
+void GameObject::addImpulse( glm::vec3 impulse )
+{
+	_velocity += impulse;
+}
+
 GameObject* GameObject::getParent()
 {
 	return _parent;

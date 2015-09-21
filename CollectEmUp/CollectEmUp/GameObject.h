@@ -25,6 +25,7 @@ public:
 	virtual bool contains( GameObject* child );
 
 	virtual void addForce( glm::vec3 force );
+	virtual void addImpulse( glm::vec3 impulse );
 
 	GameObject* getParent();
 	void setParent( GameObject* value );

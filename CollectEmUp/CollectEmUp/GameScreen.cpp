@@ -42,6 +42,7 @@ void GameScreen::onMouseDown( MouseEvent e )
 {
 	_mouseIsDown = true;
 	updateMouse( e );
+	_environment->onMouseDown( e );
 }
 void GameScreen::onMouseUp( MouseEvent e )
 {
