@@ -5,6 +5,10 @@
 class ExamplePrefabClass :
 	public GameObject
 {
+private:
+	glm::vec3 basePosition;
+	float elapsedTime, posDeviation, bobRate;
+
 public:
 	ExamplePrefabClass(const char* modelFilename);
 	~ExamplePrefabClass(void);
@@ -12,4 +16,3 @@ public:
 	virtual void update( float dt );
 	virtual void draw( float dt );
 };
-

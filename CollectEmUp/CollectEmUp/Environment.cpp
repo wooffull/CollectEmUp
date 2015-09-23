@@ -1,4 +1,5 @@
 #include "Environment.h"
+#include "ExamplePrefabClass.h"
 
 const glm::vec3& Environment::GRAVITY = glm::vec3( 0, -1.0f, 0 );
 const float& Environment::DRAG = -0.10f;
@@ -62,17 +63,10 @@ void Environment::applyDrag()
 
 void Environment::onAdded( Event e )
 {
-	ModelImporter modelImporter;
-	Model* cube = modelImporter.loadModel( "Models/cube.obj" );
-	GameObject* g = new GameObject();
-	g->setModel( cube );
-	g->setPosition( glm::vec3( 0, 0, -.5f ) );
-	g->setColor( 0.5f, 0.3f, 0.5f );
-	g->setScale( glm::vec3( 0.5f, 0.5f, 0.5f ) );
-	g->setRotationAxis( glm::vec3( sqrt( 2 ), sqrt( 2 ), 0 ) );
-	g->setRotationalVelocity( 0.001f );
-	g->setFixed( false );
-	addChild( g );
+	//Add level objects here.
+	//IMPORTANT: Model files are stored in the Models subfolder, and so their filenames must be prefixed with "Models/". Failure to do so will result in a memory error at runtime.
+	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass("Models/cube.obj");
+	addChild( rotatingCube );
 }
 
 void Environment::onRemoved( Event e )
