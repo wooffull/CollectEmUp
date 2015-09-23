@@ -8,7 +8,7 @@ FileImporter::~FileImporter()
 {
 }
 
-ImportData* FileImporter::loadFromFile( char* filePath )
+ImportData* FileImporter::loadFromFile( const char* filePath )
 {
 	std::ifstream inFile( filePath, std::ios::binary );
 

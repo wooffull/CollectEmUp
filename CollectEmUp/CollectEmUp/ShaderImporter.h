@@ -11,9 +11,9 @@ public:
 	ShaderImporter();
 	virtual ~ShaderImporter();
 
-	GLuint loadShaderProgram( char* vertexFile, char* fragmentFile );
+	GLuint loadShaderProgram( const char* vertexFile, const char* fragmentFile );
 
 private:
-	GLuint loadShader( char* filePath, GLenum shaderType );
+	GLuint loadShader( const char* filePath, GLenum shaderType );
 };
 

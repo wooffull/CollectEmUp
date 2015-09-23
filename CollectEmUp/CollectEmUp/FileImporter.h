@@ -13,6 +13,6 @@ public:
 	FileImporter();
 	virtual ~FileImporter();
 
-	virtual ImportData* loadFromFile( char* filePath );
+	virtual ImportData* loadFromFile( const char* filePath );
 };
 

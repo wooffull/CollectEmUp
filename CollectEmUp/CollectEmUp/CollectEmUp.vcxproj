@@ -17,6 +17,7 @@
     <ClCompile Include="Environment.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventDispatcher.cpp" />
+    <ClCompile Include="ExamplePrefabClass.cpp" />
     <ClCompile Include="FileImportData.cpp" />
     <ClCompile Include="FileImporter.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -43,6 +44,7 @@
     <ClInclude Include="Environment.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventDispatcher.h" />
+    <ClInclude Include="ExamplePrefabClass.h" />
     <ClInclude Include="FileImportData.h" />
     <ClInclude Include="FileImporter.h" />
     <ClInclude Include="Game.h" />

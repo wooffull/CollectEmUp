@@ -11,7 +11,7 @@ ModelImporter::~ModelImporter()
 {
 }
 
-ImportData* ModelImporter::loadFromFile( char* filePath )
+ImportData* ModelImporter::loadFromFile( const char* filePath )
 {
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> textureCoordinates;
@@ -73,7 +73,7 @@ ImportData* ModelImporter::loadFromFile( char* filePath )
 	}
 }
 
-Model* ModelImporter::loadModel( char* filePath, GLuint programIndex )
+Model* ModelImporter::loadModel( const char* filePath, GLuint programIndex )
 {
 	ImportData* importData = loadFromFile( filePath );
 	ModelImportData* modelImportData = static_cast<ModelImportData*>( importData );

@@ -1,9 +1,12 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CollectEmUp", "CollectEmUp\CollectEmUp.vcxproj", "{2A4717AC-E242-48F8-82A7-F2912667BDF1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01166FE9-E4EE-484C-A975-D715F433B327}"
+	ProjectSection(SolutionItems) = preProject
+		CollectEmUp\ExamplePrefabClass.cpp = CollectEmUp\ExamplePrefabClass.cpp
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

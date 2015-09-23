@@ -132,6 +132,9 @@
     <ClCompile Include="ShaderImporter.cpp">
       <Filter>Source Files\Util\Importers</Filter>
     </ClCompile>
+    <ClCompile Include="ExamplePrefabClass.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IEventDispatcher.h">
@@ -208,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="ShaderImporter.h">
       <Filter>Header Files\Util\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="ExamplePrefabClass.h">
+      <Filter>Header Files\Misc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

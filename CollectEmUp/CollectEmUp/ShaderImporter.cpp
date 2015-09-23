@@ -9,7 +9,7 @@ ShaderImporter::~ShaderImporter()
 {
 }
 
-GLuint ShaderImporter::loadShaderProgram( char* vertexFile, char* fragmentFile )
+GLuint ShaderImporter::loadShaderProgram( const char* vertexFile, const char* fragmentFile )
 {
 	GLuint vertexShaderIndex = loadShader( vertexFile, GL_VERTEX_SHADER );
 
@@ -57,7 +57,7 @@ GLuint ShaderImporter::loadShaderProgram( char* vertexFile, char* fragmentFile )
 	}
 }
 
-GLuint ShaderImporter::loadShader( char* filePath, GLenum shaderType )
+GLuint ShaderImporter::loadShader( const char* filePath, GLenum shaderType )
 {
 	ImportData* importData = loadFromFile( filePath );
 	FileImportData* fileImportData = static_cast<FileImportData*>( importData );

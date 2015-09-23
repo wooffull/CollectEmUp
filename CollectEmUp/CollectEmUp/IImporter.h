@@ -5,6 +5,6 @@
 class IImporter
 {
 public:
-	virtual ImportData* loadFromFile( char* filePath ) = 0;
+	virtual ImportData* loadFromFile( const char* filePath ) = 0;
 };
 

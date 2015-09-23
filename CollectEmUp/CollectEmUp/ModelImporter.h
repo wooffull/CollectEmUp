@@ -17,8 +17,8 @@ public:
 	ModelImporter();
 	virtual ~ModelImporter();
 	
-	virtual ImportData* loadFromFile( char* filePath );
-	virtual Model* loadModel( char* filePath, GLuint programIndex = 0 );
+	virtual ImportData* loadFromFile( const char* filePath );
+	virtual Model* loadModel( const char* filePath, GLuint programIndex = 0 );
 
 private:
 	static const std::string& VALUE_DELIMITER;
