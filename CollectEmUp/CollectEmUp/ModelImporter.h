@@ -17,14 +17,13 @@ public:
 	ModelImporter();
 	virtual ~ModelImporter();
 	
-	virtual ImportData* loadFromFile( const char* filePath );
-	virtual Model* loadModel( const char* filePath, GLuint programIndex = 0 );
+	virtual ImportData* loadFromFile( char* filePath );
+	virtual Model* loadModel( char* filePath, GLuint programIndex = 0 );
 
 private:
-	static const std::string& VALUE_DELIMITER;
-	static const std::string& FACE_VERTEX_INDEX_DELIMITER;
+	static const char& VALUE_DELIMITER;
+	static const char& FACE_VERTEX_INDEX_DELIMITER;
 
-	glm::vec3 parseVertexValues( std::string line );
-	std::vector<GLushort> parseFaceValues( std::string line );
+	std::vector<std::string> split( std::string toBeSplit, char delimiter );
 };
 

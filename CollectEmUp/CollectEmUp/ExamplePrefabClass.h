@@ -1,6 +1,8 @@
 #pragma once
 
-#include "gameobject.h"
+#include "GameObject.h"
+#include "ModelImporter.h"
+#include "ModelImportData.h"
 
 class ExamplePrefabClass :
 	public GameObject
@@ -10,8 +12,8 @@ private:
 	float elapsedTime, posDeviation, bobRate;
 
 public:
-	ExamplePrefabClass(const char* modelFilename);
-	~ExamplePrefabClass(void);
+	ExamplePrefabClass( char* modelFilename );
+	~ExamplePrefabClass();
 
 	virtual void update( float dt );
 	virtual void draw( float dt );

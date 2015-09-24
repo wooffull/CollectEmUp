@@ -1,7 +1,7 @@
 #include "ModelImporter.h"
 
-const std::string& ModelImporter::VALUE_DELIMITER = " ";
-const std::string& ModelImporter::FACE_VERTEX_INDEX_DELIMITER = "/";
+const char& ModelImporter::VALUE_DELIMITER = ' ';
+const char& ModelImporter::FACE_VERTEX_INDEX_DELIMITER = '/';
 
 ModelImporter::ModelImporter()
 {
@@ -11,12 +11,14 @@ ModelImporter::~ModelImporter()
 {
 }
 
-ImportData* ModelImporter::loadFromFile( const char* filePath )
+ImportData* ModelImporter::loadFromFile( char* filePath )
 {
 	std::vector<glm::vec3> vertices;
-	std::vector<glm::vec2> textureCoordinates;
+	std::vector<glm::vec2> uvVertices;
 	std::vector<glm::vec3> normals;
 	std::vector<GLushort> faceVertexIndices;
+	std::vector<GLushort> faceUvIndices;
+	std::vector<GLushort> faceNormalIndices;
 
 	std::ifstream inFile( filePath );
 
@@ -31,38 +33,61 @@ ImportData* ModelImporter::loadFromFile( const char* filePath )
 			bool isNormal = ( line.find( "vn " ) == 0 );
 			bool isFace = ( line.find( "f " ) == 0 );
 			bool isValid = isVertex || isTextureCoord || isNormal || isFace;
-
+			
 			if( isValid )
 			{
+				std::vector<std::string> splitValues = split( line, VALUE_DELIMITER );
+				splitValues.erase( splitValues.begin(), splitValues.begin() + 1 );
+
 				if( isVertex )
 				{
-					glm::vec3 vertex = parseVertexValues( line );
+					glm::vec3 vertex;
+					vertex.x = std::stof( splitValues[0] );
+					vertex.y = std::stof( splitValues[1] );
+					vertex.z = std::stof( splitValues[2] );
 					vertices.push_back( vertex );
 				}
 				else if( isTextureCoord )
 				{
-					glm::vec3 vertex = parseVertexValues( line );
-					glm::vec2 textureCoordinate( vertex.x, vertex.y );
-					textureCoordinates.push_back( textureCoordinate );
+					glm::vec2 uv;
+					uv.x = std::stof( splitValues[0] );
+					uv.y = std::stof( splitValues[1] );
+					uvVertices.push_back( uv );
 				}
 				else if( isNormal )
 				{
-					glm::vec3 normal = parseVertexValues( line );
+					glm::vec3 normal;
+					normal.x = std::stof( splitValues[0] );
+					normal.y = std::stof( splitValues[1] );
+					normal.z = std::stof( splitValues[2] );
 					normals.push_back( normal );
 				}
 				else if( isFace )
 				{
-					std::vector<GLushort> face = parseFaceValues( line );
+					GLushort vertexIndices[3], uvIndices[3], normalIndices[3];
 
-					// Put all index values from the parsed face into the array containing them all
-					faceVertexIndices.insert( faceVertexIndices.end(), face.begin(), face.end() );
+					for( unsigned i = 0; i < splitValues.size(); i++ )
+					{
+						// -1 because face vertex indices start at 1, not 0
+						std::vector<std::string> splitData = split( splitValues[i], FACE_VERTEX_INDEX_DELIMITER );
+						vertexIndices[i] = (GLushort)( std::stoi( splitData[0] ) - 1 );
+						uvIndices[i] = (GLushort)( std::stoi( splitData[1] ) - 1 );
+						normalIndices[i] = (GLushort)( std::stoi( splitData[2] ) - 1 );
+					}
+
+					for( unsigned i = 0; i < 3; i++ )
+					{
+						faceVertexIndices.push_back( vertexIndices[i] );
+						faceUvIndices.push_back( uvIndices[i] );
+						faceNormalIndices.push_back( normalIndices[i] );
+					}
 				}
 			}
 		}
 
 		ModelImportData* importData = new ModelImportData();
 		importData->setVertices( vertices );
-		importData->setTextureCoordinates( textureCoordinates );
+		importData->setTextureCoordinates( uvVertices );
 		importData->setNormals( normals );
 		importData->setFaceVertexIndices( faceVertexIndices );
 		return importData;
@@ -73,7 +98,7 @@ ImportData* ModelImporter::loadFromFile( const char* filePath )
 	}
 }
 
-Model* ModelImporter::loadModel( const char* filePath, GLuint programIndex )
+Model* ModelImporter::loadModel( char* filePath, GLuint programIndex )
 {
 	ImportData* importData = loadFromFile( filePath );
 	ModelImportData* modelImportData = static_cast<ModelImportData*>( importData );
@@ -86,87 +111,22 @@ Model* ModelImporter::loadModel( const char* filePath, GLuint programIndex )
 	return model;
 }
 
-glm::vec3 ModelImporter::parseVertexValues( std::string line )
+std::vector<std::string> ModelImporter::split( std::string toBeSplit, char delimiter )
 {
-	size_t valPos = line.find( VALUE_DELIMITER );
-	std::vector<float> parsedValues;
-	int totalParsedValues = 0;
-	bool endOfLine = false;
+	std::vector<std::string> splitValues;
+	splitValues.push_back("");
 
-	// Remove the key
-	line.erase( 0, valPos + 1 );
-
-	// Parse the string
-	while( true )
+	for( auto c : toBeSplit )
 	{
-		valPos = line.find( VALUE_DELIMITER );
-
-		std::string valString;
-
-		if( valPos == std::string::npos )
+		if( c == delimiter )
 		{
-			valString = line.substr( 0, line.size() );
-			endOfLine = true;
+			splitValues.push_back("");
 		}
 		else
 		{
-			valString = line.substr( 0, valPos );
+			splitValues.back().push_back( c );
 		}
-
-		float value = std::stof( valString );
-		parsedValues.push_back( value );
-		totalParsedValues++;
-
-		if( endOfLine )
-		{
-			break;
-		}
-
-		line.erase( 0, valPos + VALUE_DELIMITER.size() );
 	}
-
-	// Ensure we have 3 values in the vec3 by forcing 0s into the empty spots
-	for( int i = 0; i < 3 - totalParsedValues; i++ )
-	{
-		parsedValues.push_back( 0 );
-	}
-
-	return glm::vec3( parsedValues[0], parsedValues[1], parsedValues[2] );
-}
-
-std::vector<GLushort> ModelImporter::parseFaceValues( std::string line )
-{
-	size_t valPos = line.find( VALUE_DELIMITER );
-	size_t separatorPos;
-	std::vector<GLushort> parsedValues;
-
-	// Remove the key
-	line.erase( 0, valPos + 1 );
-
-	// Parse the string
-	while( true )
-	{
-		valPos = line.find( VALUE_DELIMITER );
-		separatorPos = line.find( FACE_VERTEX_INDEX_DELIMITER );
-
-		std::string valString;
-
-		if( separatorPos != std::string::npos )
-		{
-			valString = line.substr( 0, separatorPos );
-		}
-
-		// -1 because face vertex indices start at 1, not 0
-		GLushort value = (GLushort)( std::stoi( valString ) - 1 );
-		parsedValues.push_back( value );
-		
-		if( valPos == std::string::npos )
-		{
-			break;
-		}
-
-		line.erase( 0, valPos + VALUE_DELIMITER.size() );
-	}
-
-	return parsedValues;
+	
+	return splitValues;
 }

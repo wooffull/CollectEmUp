@@ -65,7 +65,7 @@ void Environment::onAdded( Event e )
 {
 	//Add level objects here.
 	//IMPORTANT: Model files are stored in the Models subfolder, and so their filenames must be prefixed with "Models/". Failure to do so will result in a memory error at runtime.
-	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass("Models/cube.obj");
+	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj" );
 	addChild( rotatingCube );
 }
 
