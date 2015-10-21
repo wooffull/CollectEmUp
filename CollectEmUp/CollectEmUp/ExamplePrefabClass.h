@@ -8,11 +8,11 @@ class ExamplePrefabClass :
 	public GameObject
 {
 private:
-	glm::vec3 basePosition;
-	float elapsedTime, posDeviation, bobRate;
+	glm::vec3 _basePosition;
+	float _elapsedTime, _posDeviation, _bobRate;
 
 public:
-	ExamplePrefabClass( char* modelFilename );
+	ExamplePrefabClass( char* modelFilePath, char* textureFilePath );
 	~ExamplePrefabClass();
 
 	virtual void update( float dt );

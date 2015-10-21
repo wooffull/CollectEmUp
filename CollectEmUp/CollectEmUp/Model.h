@@ -3,11 +3,12 @@
 #include <vector>
 #include <glew.h>
 #include <glm\glm.hpp>
+#include <SOIL.h>
 
 class Model
 {
 public:
-	Model( std::vector<glm::vec3> vertices, std::vector<GLushort> faces );
+	Model( std::vector<GLfloat> vertexBufferData, std::vector<GLushort> faceBufferData, char* textureFilePath );
 	virtual ~Model();
 
 	void draw();
@@ -16,7 +17,8 @@ private:
 	GLuint _vboIndex;
 	GLuint _vaoIndex;
 
-	std::vector<glm::vec3> _vertices;
-	std::vector<GLushort> _faces;
+	std::vector<GLfloat> _vertexBufferData;
+	std::vector<GLushort> _faceBufferData;
+	GLuint _textureID;
 };
 

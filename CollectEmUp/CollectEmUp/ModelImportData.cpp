@@ -8,38 +8,20 @@ ModelImportData::~ModelImportData()
 {
 }
 
-std::vector<glm::vec3> ModelImportData::getVertices()
+std::vector<GLfloat> ModelImportData::getVertexBufferData()
 {
-	return _vertices;
+	return _vertexBufferData;
 }
-void ModelImportData::setVertices( std::vector<glm::vec3> value )
+void ModelImportData::setVertexBufferData( std::vector<GLfloat> value )
 {
-	_vertices = value;
-}
-
-std::vector<glm::vec2> ModelImportData::getTextureCoordinates()
-{
-	return _textureCoordinates;
-}
-void ModelImportData::setTextureCoordinates( std::vector<glm::vec2> value )
-{
-	_textureCoordinates = value;
+	_vertexBufferData = value;
 }
 
-std::vector<glm::vec3> ModelImportData::getNormals()
+std::vector<GLushort> ModelImportData::getFaceBufferData()
 {
-	return _normals;
+	return _faceBufferData;
 }
-void ModelImportData::setNormals( std::vector<glm::vec3> value )
+void ModelImportData::setFaceBufferData( std::vector<GLushort> value )
 {
-	_normals = value;
-}
-
-std::vector<GLushort> ModelImportData::getFaceVertexIndices()
-{
-	return _faceVertexIndices;
-}
-void ModelImportData::setFaceVertexIndices( std::vector<GLushort> value )
-{
-	_faceVertexIndices = value;
+	_faceBufferData = value;
 }

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include <glew.h>
 #include <glm\glm.hpp>
 #include "FileImporter.h"
@@ -18,7 +19,7 @@ public:
 	virtual ~ModelImporter();
 	
 	virtual ImportData* loadFromFile( char* filePath );
-	virtual Model* loadModel( char* filePath, GLuint programIndex = 0 );
+	virtual Model* loadModel( char* filePath, char* textureFilePath, GLuint programIndex = 0 );
 
 private:
 	static const char& VALUE_DELIMITER;

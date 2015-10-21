@@ -3,7 +3,8 @@
 #include "GameObject.h"
 #include "Random.h"
 #include "ModelImporter.h"
-#include "MouseEvent.h"
+#include "DisplayEvent.h"
+#include "Camera.h"
 
 class Environment :
 	public GameObject
@@ -14,13 +15,14 @@ public:
 	
 	virtual void update( float dt );
 
+	void turnCamera( float dx, float dy );
+	void moveCamera( float dx, float dy );
+
 	void applyGravity();
 	void applyDrag();
 	
 	void onRemoved( Event e );
 	void onAdded( Event e );
-
-	void onMouseDown( MouseEvent e );
 
 private:
 	static const glm::vec3& GRAVITY;
@@ -29,5 +31,6 @@ private:
 	static const float& DEFLECT_PERCENTAGE;
 
 	glm::mat4 _worldMatrix;
+	Camera _camera;
 };
 

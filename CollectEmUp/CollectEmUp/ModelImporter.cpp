@@ -13,12 +13,13 @@ ModelImporter::~ModelImporter()
 
 ImportData* ModelImporter::loadFromFile( char* filePath )
 {
+	std::vector<GLfloat> vertexBufferData;
+	std::vector<GLushort> faceBufferData;
 	std::vector<glm::vec3> vertices;
 	std::vector<glm::vec2> uvVertices;
 	std::vector<glm::vec3> normals;
-	std::vector<GLushort> faceVertexIndices;
-	std::vector<GLushort> faceUvIndices;
-	std::vector<GLushort> faceNormalIndices;
+	std::unordered_map<std::string, GLushort> faceDataMap;
+	GLushort faceIndexCounter = 0;
 
 	std::ifstream inFile( filePath );
 
@@ -32,7 +33,7 @@ ImportData* ModelImporter::loadFromFile( char* filePath )
 			bool isTextureCoord = ( line.find( "vt " ) == 0 );
 			bool isNormal = ( line.find( "vn " ) == 0 );
 			bool isFace = ( line.find( "f " ) == 0 );
-			bool isValid = isVertex || isTextureCoord || isNormal || isFace;
+			bool isValid = ( isVertex || isTextureCoord || isNormal || isFace );
 			
 			if( isValid )
 			{
@@ -64,32 +65,44 @@ ImportData* ModelImporter::loadFromFile( char* filePath )
 				}
 				else if( isFace )
 				{
-					GLushort vertexIndices[3], uvIndices[3], normalIndices[3];
+					GLushort vertexIndex, uvIndex, normalIndex;
 
 					for( unsigned i = 0; i < splitValues.size(); i++ )
 					{
-						// -1 because face vertex indices start at 1, not 0
-						std::vector<std::string> splitData = split( splitValues[i], FACE_VERTEX_INDEX_DELIMITER );
-						vertexIndices[i] = (GLushort)( std::stoi( splitData[0] ) - 1 );
-						uvIndices[i] = (GLushort)( std::stoi( splitData[1] ) - 1 );
-						normalIndices[i] = (GLushort)( std::stoi( splitData[2] ) - 1 );
-					}
+						std::string currentFaceVertexData = splitValues[i];
 
-					for( unsigned i = 0; i < 3; i++ )
-					{
-						faceVertexIndices.push_back( vertexIndices[i] );
-						faceUvIndices.push_back( uvIndices[i] );
-						faceNormalIndices.push_back( normalIndices[i] );
+						// Couldn't find the current face vertex data in the unordered map, so we have to parse it
+						if( faceDataMap.find( currentFaceVertexData ) == faceDataMap.end() )
+						{
+							// Subtract 1 because face vertex indices start at 1, not 0
+							std::vector<std::string> splitData = split( splitValues[i], FACE_VERTEX_INDEX_DELIMITER );
+							vertexIndex = (GLushort)( std::stoi( splitData[0] ) - 1 );
+							uvIndex = (GLushort)( std::stoi( splitData[1] ) - 1 );
+							normalIndex = (GLushort)( std::stoi( splitData[2] ) - 1 );
+
+							vertexBufferData.push_back( vertices[vertexIndex].x );
+							vertexBufferData.push_back( vertices[vertexIndex].y );
+							vertexBufferData.push_back( vertices[vertexIndex].z );
+							vertexBufferData.push_back( uvVertices[uvIndex].x );
+							vertexBufferData.push_back( uvVertices[uvIndex].y );
+							vertexBufferData.push_back( normals[normalIndex].x );
+							vertexBufferData.push_back( normals[normalIndex].y );
+							vertexBufferData.push_back( normals[normalIndex].z );
+
+							faceDataMap.insert( std::make_pair( currentFaceVertexData, faceIndexCounter ) );
+							faceIndexCounter++;
+						}
+
+						// Add the index to the face buffer data
+						faceBufferData.push_back( faceDataMap[currentFaceVertexData] );
 					}
 				}
 			}
 		}
 
 		ModelImportData* importData = new ModelImportData();
-		importData->setVertices( vertices );
-		importData->setTextureCoordinates( uvVertices );
-		importData->setNormals( normals );
-		importData->setFaceVertexIndices( faceVertexIndices );
+		importData->setVertexBufferData( vertexBufferData );
+		importData->setFaceBufferData( faceBufferData );
 		return importData;
 	}
 	else
@@ -98,15 +111,15 @@ ImportData* ModelImporter::loadFromFile( char* filePath )
 	}
 }
 
-Model* ModelImporter::loadModel( char* filePath, GLuint programIndex )
+Model* ModelImporter::loadModel( char* filePath, char* textureFilePath, GLuint programIndex )
 {
 	ImportData* importData = loadFromFile( filePath );
 	ModelImportData* modelImportData = static_cast<ModelImportData*>( importData );
 	
-	std::vector<glm::vec3> vertices = modelImportData->getVertices();
-	std::vector<GLushort> faces = modelImportData->getFaceVertexIndices();
+	std::vector<GLfloat> vertexBufferData = modelImportData->getVertexBufferData();
+	std::vector<GLushort> faceBufferData = modelImportData->getFaceBufferData();
 
-	Model* model = new Model( vertices, faces );
+	Model* model = new Model( vertexBufferData, faceBufferData, textureFilePath );
 
 	return model;
 }

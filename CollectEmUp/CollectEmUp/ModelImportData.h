@@ -12,22 +12,14 @@ public:
 	ModelImportData();
 	virtual ~ModelImportData();
 
-	std::vector<glm::vec3> getVertices();
-	void setVertices( std::vector<glm::vec3> value );
+	std::vector<GLfloat> getVertexBufferData();
+	void setVertexBufferData( std::vector<GLfloat> value );
 
-	std::vector<glm::vec2> getTextureCoordinates();
-	void setTextureCoordinates( std::vector<glm::vec2> value );
-
-	std::vector<glm::vec3> getNormals();
-	void setNormals( std::vector<glm::vec3> value );
-
-	std::vector<GLushort> getFaceVertexIndices();
-	void setFaceVertexIndices( std::vector<GLushort> value );
+	std::vector<GLushort> getFaceBufferData();
+	void setFaceBufferData( std::vector<GLushort> value );
 
 private:
-	std::vector<glm::vec3> _vertices;
-	std::vector<glm::vec2> _textureCoordinates;
-	std::vector<glm::vec3> _normals;
-	std::vector<GLushort> _faceVertexIndices;
+	std::vector<GLfloat> _vertexBufferData;
+	std::vector<GLushort> _faceBufferData;
 };
 

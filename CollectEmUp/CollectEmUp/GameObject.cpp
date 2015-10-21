@@ -63,10 +63,6 @@ void GameObject::update( float dt )
 	{
 		( *it )->update( dt );
 	}
-
-	// Reset acceleration
-	_acceleration = vec3( 0, 0, 0 );
-	_rotationalAcceleration = 0;
 }
 
 void GameObject::draw( float dt )
@@ -95,12 +91,12 @@ void GameObject::drawShape()
 
 	if( _model != nullptr )
 	{
-		glm::mat4 objMatrix =
+		glm::mat4 worldMatrix =
 			translate( _position ) *
 			scale( _scale ) *
 			rotate( _rotation, _rotationAxis );
 		setShaderVec3( _programIndex, "scale", _scale );
-		setShaderMatrix( _programIndex, "objMatrix", objMatrix );
+		setShaderMatrix( _programIndex, "worldMatrix", worldMatrix );
 
 		_model->draw();
 	}
@@ -114,7 +110,7 @@ void GameObject::addChild( GameObject* child )
 		_children->push_back( child );
 
 		// Dispatch event that child has been added
-		Event e( Event::ADDED );
+		DisplayEvent e( DisplayEvent::ADDED );
 		child->dispatchEvent( e );
 		child->setParent( this );
 	}
@@ -131,7 +127,7 @@ void GameObject::removeChild( GameObject* child, bool free )
 		if( curChild == child )
 		{
 			// Dispatch event that child has been removed
-			Event e( Event::REMOVED );
+			DisplayEvent e( DisplayEvent::REMOVED );
 			child->dispatchEvent( e );
 			child->setParent( nullptr );
 

@@ -7,6 +7,7 @@
 #include "Event.h"
 #include "GameEvent.h"
 #include "MouseEvent.h"
+#include "KeyboardEvent.h"
 #include "EventDispatcher.h"
 #include "GameException.h"
 #include "Callback.h"
@@ -36,14 +37,17 @@ public:
 
 	void onClose( Event e );
 	void onMouseButtonChange( int button, int action, int mods );
-	void onMouseMove( double x, double y );
+	void onKeyChange( int key, int action );
 
 private:
 	GLFWwindow* _windowPtr;
 	IScreen* _curScreen;
 	Color _clearColor;
 	glm::vec2 _mousePos;
+	int _width;
+	int _height;
 
 	glm::vec2 getCursorPos();
+	void updateMouseMovement();
 };
 

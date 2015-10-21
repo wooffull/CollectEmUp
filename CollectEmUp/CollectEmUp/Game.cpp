@@ -12,6 +12,9 @@ Game::Game( const char* name, int width, int height ) :
 		throw GameException::GlfwInitFail;
 	}
 
+	_width = width;
+	_height = height;
+
 	// Create a windowed mode window and its OpenGL context 
 	_windowPtr = glfwCreateWindow(
 		width,
@@ -38,8 +41,8 @@ Game::Game( const char* name, int width, int height ) :
 	// Add event listener to self for when the game closes
 	Callback c = std::bind( &Game::onClose, this, std::placeholders::_1 );
 	addEventListener( GameEvent::CLOSE, c );
-
-	_mousePos = glm::vec2( 0, 0 );
+	
+	_mousePos = glm::vec2( _width * 0.5, _height * 0.5 );
 
 	Random::seedRandom( unsigned( time( NULL ) ) );
 }
@@ -66,6 +69,11 @@ void Game::start()
 		dt = curTime - prevTime;
 
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+		updateMouseMovement();
+		
+		_mousePos = glm::vec2( _width * 0.5, _height * 0.5 );
+		glfwSetCursorPos( _windowPtr, _mousePos.x, _mousePos.y );
 
 		if( _curScreen != nullptr )
 		{
@@ -154,15 +162,20 @@ void Game::onMouseButtonChange( int button, int action, int mods )
 	}
 }
 
-void Game::onMouseMove( double x, double y )
+void Game::onKeyChange( int key, int action )
 {
 	if( _curScreen != nullptr )
 	{
-		glm::vec2 cursorPos = getCursorPos();
-		glm::vec2 displacement = cursorPos - _mousePos;
-		MouseEvent e( MouseEvent::MOUSE_MOVE, cursorPos.x, cursorPos.y, displacement.x, displacement.y );
-		_curScreen->onMouseMove( e );
-		_mousePos = cursorPos;
+		if( action == GLFW_PRESS )
+		{
+			KeyboardEvent e( KeyboardEvent::KEY_PRESSED, key );
+			_curScreen->onKeyPressed( e );
+		}
+		else if( action == GLFW_RELEASE )
+		{
+			KeyboardEvent e( KeyboardEvent::KEY_RELEASED, key );
+			_curScreen->onKeyReleased( e );
+		}
 	}
 }
 
@@ -180,4 +193,25 @@ glm::vec2 Game::getCursorPos()
 	cursorPosition.y = ( 2.0f * ( (float)y / (float)height ) - 1.0f ) * -1.0f;
 
 	return cursorPosition;
+}
+
+void Game::updateMouseMovement()
+{
+	if( _curScreen != nullptr )
+	{
+		glm::vec2 cursorPos = getCursorPos();
+		cursorPos.x = ( cursorPos.x + 1 ) * 0.5f * _width; // Adjust cursor position.x from [-1, 1] to [0, width]
+		cursorPos.y = ( cursorPos.y + 1 ) * 0.5f * _height; // Adjust cursor position.y from [-1, 1] to [0, height]
+
+		glm::vec2 displacement = cursorPos - _mousePos;
+
+		// Dispatch a "mouse move" event if the mouse is in a different position that before
+		if( displacement.x * displacement.x + displacement.y * displacement.y > 0 )
+		{
+			MouseEvent e( MouseEvent::MOUSE_MOVE, cursorPos.x, cursorPos.y, displacement.x, displacement.y );
+			_curScreen->onMouseMove( e );
+		}
+
+		_mousePos = cursorPos;
+	}
 }

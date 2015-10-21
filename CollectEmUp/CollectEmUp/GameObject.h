@@ -6,6 +6,7 @@
 
 #include "ShaderHelper.h"
 #include "EventDispatcher.h"
+#include "DisplayEvent.h"
 #include "Color.h"
 #include "Model.h"
 
