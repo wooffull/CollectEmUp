@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+<<<<<<< HEAD:CollectEmUp/CollectEmUp/CollectEmUp.vcxproj
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="DirectLightSource.cpp" />
+    <ClCompile Include="DispatcherCallbackMap.cpp" />
+    <ClCompile Include="DisplayEvent.cpp" />
+    <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventDispatcher.cpp" />
+    <ClCompile Include="ExamplePrefabClass.cpp" />
+    <ClCompile Include="FileImportData.cpp" />
+    <ClCompile Include="FileImporter.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameEvent.cpp" />
+    <ClCompile Include="GameException.h" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="ImportData.cpp" />
+    <ClCompile Include="KeyboardEvent.cpp" />
+    <ClCompile Include="LightSource.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelImportData.cpp" />
+    <ClCompile Include="ModelImporter.cpp" />
+    <ClCompile Include="MouseEvent.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="ShaderHelper.cpp" />
+    <ClCompile Include="ShaderImporter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Callback.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="DirectLightSource.h" />
+    <ClInclude Include="DispatcherCallbackMap.h" />
+    <ClInclude Include="DisplayEvent.h" />
+    <ClInclude Include="Environment.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventDispatcher.h" />
+    <ClInclude Include="ExamplePrefabClass.h" />
+    <ClInclude Include="FileImportData.h" />
+    <ClInclude Include="FileImporter.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameEvent.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="IEventDispatcher.h" />
+    <ClInclude Include="IImporter.h" />
+    <ClInclude Include="ImportData.h" />
+    <ClInclude Include="IScreen.h" />
+    <ClInclude Include="KeyboardEvent.h" />
+    <ClInclude Include="LightSource.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelImportData.h" />
+    <ClInclude Include="ModelImporter.h" />
+    <ClInclude Include="MouseEvent.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="ShaderHelper.h" />
+    <ClInclude Include="ShaderImporter.h" />
+=======
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+>>>>>>> 98a0cf139fc7b26c97a6535962feb5278c59232d:CollectEmUp/CollectEmUp.vcxproj
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{62EEEEED-4B6B-4457-A858-B7601C519CEF}</ProjectGuid>
+    <RootNamespace>CollectEmUp</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ExecutablePath>$(ProjectDir)bin;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>$(ProjectDir)include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+<<<<<<< HEAD:CollectEmUp/CollectEmUp/CollectEmUp.vcxproj
+      <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+=======
+>>>>>>> 98a0cf139fc7b26c97a6535962feb5278c59232d:CollectEmUp/CollectEmUp.vcxproj
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Callback.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="DirectLightSource.h" />
+    <ClInclude Include="DispatcherCallbackMap.h" />
+    <ClInclude Include="Environment.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventDispatcher.h" />
+    <ClInclude Include="ExamplePrefabClass.h" />
+    <ClInclude Include="FileImportData.h" />
+    <ClInclude Include="FileImporter.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="GameEvent.h" />
+    <ClInclude Include="GameException.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="IEventDispatcher.h" />
+    <ClInclude Include="IImporter.h" />
+    <ClInclude Include="ImportData.h" />
+    <ClInclude Include="IScreen.h" />
+    <ClInclude Include="LightSource.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelImportData.h" />
+    <ClInclude Include="ModelImporter.h" />
+    <ClInclude Include="MouseEvent.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="ShaderHelper.h" />
+    <ClInclude Include="ShaderImporter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Color.cpp" />
+    <ClCompile Include="DirectLightSource.cpp" />
+    <ClCompile Include="DispatcherCallbackMap.cpp" />
+    <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventDispatcher.cpp" />
+    <ClCompile Include="ExamplePrefabClass.cpp" />
+    <ClCompile Include="FileImportData.cpp" />
+    <ClCompile Include="FileImporter.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameEvent.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="ImportData.cpp" />
+    <ClCompile Include="LightSource.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelImportData.cpp" />
+    <ClCompile Include="ModelImporter.cpp" />
+    <ClCompile Include="MouseEvent.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="ShaderHelper.cpp" />
+    <ClCompile Include="ShaderImporter.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
