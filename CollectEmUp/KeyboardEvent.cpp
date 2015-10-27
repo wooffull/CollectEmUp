@@ -4,9 +4,9 @@ const std::string& KeyboardEvent::KEY_PRESSED = "keyPressed";
 const std::string& KeyboardEvent::KEY_RELEASED = "keyReleased";
 
 KeyboardEvent::KeyboardEvent( const std::string& name, int key ) :
-	Event( name )
+    Event( name )
 {
-	_key = key;
+    _key = key;
 }
 
 KeyboardEvent::~KeyboardEvent()
@@ -15,5 +15,5 @@ KeyboardEvent::~KeyboardEvent()
 
 int KeyboardEvent::getKey()
 {
-	return _key;
+    return _key;
 }
