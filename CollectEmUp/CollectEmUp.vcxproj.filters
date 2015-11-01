@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="ExamplePrefabClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -82,11 +79,14 @@
     <ClCompile Include="KeyboardEvent.cpp">
       <Filter>Source Files\Event</Filter>
     </ClCompile>
+    <ClCompile Include="BlockPlatform.cpp">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClCompile>
+    <ClCompile Include="ExamplePrefabClass.cpp">
+      <Filter>Source Files\Prefabs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ExamplePrefabClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -171,6 +171,12 @@
     <ClInclude Include="KeyboardEvent.h">
       <Filter>Header Files\Event</Filter>
     </ClInclude>
+    <ClInclude Include="BlockPlatform.h">
+      <Filter>Header Files\Prefabs</Filter>
+    </ClInclude>
+    <ClInclude Include="ExamplePrefabClass.h">
+      <Filter>Header Files\Prefabs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -226,6 +232,12 @@
     </Filter>
     <Filter Include="Source Files\Util\Importers">
       <UniqueIdentifier>{2e17e953-2ecd-4b7a-b05f-ea258c133560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Prefabs">
+      <UniqueIdentifier>{3b7b369d-2914-4fc1-bedb-f8067a21c4cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Prefabs">
+      <UniqueIdentifier>{2dd4c24c-647a-491a-a0fe-c262665b0c06}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

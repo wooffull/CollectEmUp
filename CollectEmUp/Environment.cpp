@@ -1,5 +1,6 @@
 #include "Environment.h"
 #include "ExamplePrefabClass.h"
+#include "BlockPlatform.h"
 
 const glm::vec3& Environment::GRAVITY = glm::vec3( 0, -1.0f, 0 );
 const float& Environment::DRAG = -0.10f;
@@ -95,6 +96,9 @@ void Environment::onAdded( Event e )
 	// Failure to do so will result in a memory error at runtime.
 	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/cube-texture.png" );
 	addChild( rotatingCube );
+	BlockPlatform* ground = new BlockPlatform(vec3(0, 0, 0), vec3(10, 1, 10));
+	addChild(ground);
+	
 }
 
 void Environment::onRemoved( Event e )
