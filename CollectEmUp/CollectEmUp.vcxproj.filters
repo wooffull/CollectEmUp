@@ -82,6 +82,9 @@
     <ClCompile Include="KeyboardEvent.cpp">
       <Filter>Source Files\Event</Filter>
     </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
+      <Filter>Source Files\Display\Util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExamplePrefabClass.h">
@@ -171,6 +174,9 @@
     <ClInclude Include="KeyboardEvent.h">
       <Filter>Header Files\Event</Filter>
     </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Header Files\Display\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -226,6 +232,12 @@
     </Filter>
     <Filter Include="Source Files\Util\Importers">
       <UniqueIdentifier>{2e17e953-2ecd-4b7a-b05f-ea258c133560}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Display\Util">
+      <UniqueIdentifier>{bd322429-f9d0-4063-a497-b3be65a2b9fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Display\Util">
+      <UniqueIdentifier>{a489efc9-1930-49e3-a3eb-5d0241c9391e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

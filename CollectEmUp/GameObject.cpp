@@ -18,6 +18,7 @@ GameObject::GameObject() :
 	_color = Color();
 	_programIndex = -1;
 	_model = nullptr;
+	_boundingBox = nullptr;
 }
 
 GameObject::~GameObject()
@@ -313,4 +314,5 @@ Model* GameObject::getModel()
 void GameObject::setModel( Model* value )
 {
 	_model = value;
+	_boundingBox = &BoundingBox::createFromModel(_model);
 }

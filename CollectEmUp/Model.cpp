@@ -5,14 +5,6 @@ Model::Model( std::vector<GLfloat> vertexBufferData, std::vector<GLushort> faceB
 	_vertexBufferData = vertexBufferData;
 	_faceBufferData = faceBufferData;
 
-	//get min and max vertex values
-	getMaxX();
-	getMaxY();
-	getMaxZ();
-	getMinX();
-	getMinY();
-	getMinZ();
-
 	// Load texture
 	_textureID = SOIL_load_OGL_texture(
 		textureFilePath, SOIL_LOAD_AUTO,
@@ -65,13 +57,14 @@ void Model::draw()
 	glDrawElements( GL_TRIANGLES, 8 * _faceBufferData.size(), GL_UNSIGNED_SHORT, 0 );
 }
 
+/*
 std::vector<glm::vec3> Model::boundingBox(GLushort maxX, GLushort maxY, GLushort maxZ, GLushort minX, GLushort minY, GLushort minZ)
 {
 	//vector to contain the vec3s for each vertex in the bounding box
 	std::vector<glm::vec3> boxVectors;
 	
 	//data showing point connections and layout of bounding box
-	/*
+	
 	point 1 connects to: point 2, point 3, point 5
 	point 2 connects to: point 1, point 4, point 6
 	point 3 connects to: point 1, point 4, point 7
@@ -80,7 +73,7 @@ std::vector<glm::vec3> Model::boundingBox(GLushort maxX, GLushort maxY, GLushort
 	point 6 connects to: point 2, point 5, point 8
 	point 7 connects to: point 3, point 5, point 8
 	point 8 connects to: point 4, point 6, point 7
-	*/
+	
 
 	//top square
 	// (maxX, maxY, maxZ)
@@ -112,88 +105,9 @@ std::vector<glm::vec3> Model::boundingBox(GLushort maxX, GLushort maxY, GLushort
 
 	return boxVectors;
 }
+*/
 
-GLushort Model::getMaxX()
+std::vector<GLfloat> Model::getVertexBufferData()
 {
-	GLushort max = -1000000;
-	for (int i = 0; i < _vertexBufferData.size; i += 8)
-	{
-		GLushort temp = _vertexBufferData[i];
-		if (temp > max)
-		{
-			max = temp;
-		}
-	}
-	_maxX = max;
-	return max;
-}
-GLushort Model::getMaxY()
-{
-	GLushort max = -1000000;
-	for (int i = 1; i < _vertexBufferData.size; i += 8)
-	{
-		GLushort temp = _vertexBufferData[i];
-		if (temp > max)
-		{
-			max = temp;
-		}
-	}
-	_maxY = max;
-	return max;
-}
-GLushort Model::getMaxZ()
-{
-	GLushort max = -1000000;
-	for (int i = 2; i < _vertexBufferData.size; i += 8)
-	{
-		GLushort temp = _vertexBufferData[i];
-		if (temp > max)
-		{
-			max = temp;
-		}
-	}
-	_maxZ = max;
-	return max;
-}
-GLushort Model::getMinX()
-{
-	GLushort min = 1000000;
-	for (int i = 0; i < _vertexBufferData.size; i += 8)
-	{
-		GLushort temp = _vertexBufferData[i];
-		if (temp < min)
-		{
-			min = temp;
-		}
-	}
-	_minX = min;
-	return min;
-}
-GLushort Model::getMinY()
-{
-	GLushort min = 1000000;
-	for (int i = 1; i < _vertexBufferData.size; i += 8)
-	{
-		GLushort temp = _vertexBufferData[i];
-		if (temp < min)
-		{
-			min = temp;
-		}
-	}
-	_minY = min;
-	return min;
-}
-GLushort Model::getMinZ()
-{
-	GLushort min = 1000000;
-	for (int i = 2; i < _vertexBufferData.size; i += 8)
-	{
-		GLushort temp = _vertexBufferData[i];
-		if (temp < min)
-		{
-			min = temp;
-		}
-	}
-	_minZ = min;
-	return min;
+	return _vertexBufferData;
 }
