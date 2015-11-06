@@ -48,14 +48,16 @@ void Environment::turnCamera( float dx, float dy )
 {
 	_camera.turn( dx, dy );
 }
-void Environment::moveCamera( float dx, float dy )
+void Environment::moveCamera( float dx, float dy, float dz )
 {
 	glm::vec3 forward = _camera.getForward();
 	glm::vec3 right = _camera.getRight();
-	forward *= dy;
+	glm::vec3 up = _camera.getUp();
+	forward *= dz;
 	right *= -dx;
+	up *= dy;
 
-	glm::vec3 movement = forward + right;
+	glm::vec3 movement = forward + right + up;
 	movement /= movement.length();
 	movement *= 5.0f;
 

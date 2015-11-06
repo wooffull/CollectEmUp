@@ -22,10 +22,6 @@ GameScreen::GameScreen()
 	_mousePos = glm::vec2( 0, 0 );
 	_mouseDisplacement = glm::vec2( 0, 0 );
 	_mouseIsDown = false;
-	_wKeyPressed = false;
-	_aKeyPressed = false;
-	_sKeyPressed = false;
-	_dKeyPressed = false;
 }
 
 GameScreen::~GameScreen()
@@ -39,27 +35,36 @@ void GameScreen::update( float dt )
 
 	float dx = 0;
 	float dy = 0;
+	float dz = 0;
 
-	if( _wKeyPressed )
+	if(_keysPressed[GLFW_KEY_W])
 	{
-		dy += dt;
+		dz += dt;
 	}
-	if( _sKeyPressed )
+	if(_keysPressed[GLFW_KEY_S])
 	{
-		dy -= dt;
+		dz -= dt;
 	}
-	if( _aKeyPressed )
+	if(_keysPressed[GLFW_KEY_A])
 	{
 		dx -= dt;
 	}
-	if( _dKeyPressed )
+	if(_keysPressed[GLFW_KEY_D])
 	{
 		dx += dt;
 	}
-
-	if( dx != 0 || dy != 0 )
+	if (_keysPressed[GLFW_KEY_SPACE])
 	{
-		_environment->moveCamera( dx, dy );
+		dy += dt;
+	}
+	if (_keysPressed[GLFW_KEY_LEFT_SHIFT])
+	{
+		dy -= dt;
+	}
+
+	if( dx != 0 || dy != 0 || dz != 0 )
+	{
+		_environment->moveCamera( dx, dy, dz );
 	}
 }
 
@@ -81,45 +86,11 @@ void GameScreen::onMouseUp( MouseEvent e )
 }
 void GameScreen::onKeyPressed( KeyboardEvent e )
 {
-	switch( e.getKey() )
-	{
-	case GLFW_KEY_W:
-		_wKeyPressed = true;
-		break;
-		
-	case GLFW_KEY_A:
-		_aKeyPressed = true;
-		break;
-
-	case GLFW_KEY_S:
-		_sKeyPressed = true;
-		break;
-
-	case GLFW_KEY_D:
-		_dKeyPressed = true;
-		break;
-	}
+	_keysPressed[e.getKey()] = true;
 }
 void GameScreen::onKeyReleased( KeyboardEvent e )
 {
-	switch( e.getKey() )
-	{
-	case GLFW_KEY_W:
-		_wKeyPressed = false;
-		break;
-		
-	case GLFW_KEY_A:
-		_aKeyPressed = false;
-		break;
-
-	case GLFW_KEY_S:
-		_sKeyPressed = false;
-		break;
-
-	case GLFW_KEY_D:
-		_dKeyPressed = false;
-		break;
-	}
+	_keysPressed[e.getKey()] = false;
 }
 
 void GameScreen::updateMouse( MouseEvent e )

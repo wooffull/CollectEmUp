@@ -16,7 +16,7 @@ public:
 	virtual void update( float dt );
 
 	void turnCamera( float dx, float dy );
-	void moveCamera( float dx, float dy );
+	void moveCamera( float dx, float dy, float dz );
 
 	void applyGravity();
 	void applyDrag();
