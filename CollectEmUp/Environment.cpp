@@ -66,6 +66,12 @@ void Environment::moveCamera( float dx, float dy, float dz )
 	_camera.setPosition( newPosition );
 }
 
+void Environment::movePlayer(glm::vec3 delta)
+{
+	float movementSpeed = 2.0f;
+	player->setPosition(player->getPosition() + delta*movementSpeed);
+}
+
 void Environment::applyGravity()
 {
 	auto begin = _children->begin();
@@ -95,8 +101,10 @@ void Environment::onAdded( Event e )
 	// IMPORTANT: Model files are stored in the Models subfolder,
 	// and so their filenames must be prefixed with "Models/".
 	// Failure to do so will result in a memory error at runtime.
-	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/cube-texture.png" );
+	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/platform.obj", "Models/Textures/cube-texture.png" );
+	player = new KeyboardMovableGO("Models/cube.obj", "Models/Textures/cube-texture.png");
 	addChild( rotatingCube );
+	addChild( player );
 }
 
 void Environment::onRemoved( Event e )

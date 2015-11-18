@@ -30,6 +30,7 @@
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="ImportData.cpp" />
     <ClCompile Include="KeyboardEvent.cpp" />
+    <ClCompile Include="KeyboardMovableGO.cpp" />
     <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -63,6 +64,7 @@
     <ClInclude Include="ImportData.h" />
     <ClInclude Include="IScreen.h" />
     <ClInclude Include="KeyboardEvent.h" />
+    <ClInclude Include="KeyboardMovableGO.h" />
     <ClInclude Include="LightSource.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelImportData.h" />

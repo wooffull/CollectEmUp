@@ -66,6 +66,30 @@ void GameScreen::update( float dt )
 	{
 		_environment->moveCamera( dx, dy, dz );
 	}
+
+	dx = 0;
+	dy = 0;
+	dz = 0;
+	if (_keysPressed[GLFW_KEY_UP])
+	{
+		dz += dt;
+	}
+	if (_keysPressed[GLFW_KEY_LEFT])
+	{
+		dx += dt;
+	}
+	if (_keysPressed[GLFW_KEY_DOWN])
+	{
+		dz -= dt;
+	}
+	if (_keysPressed[GLFW_KEY_RIGHT])
+	{
+		dx -= dt;
+	}
+	if (dx != 0 || dy != 0 || dz != 0)
+	{
+		_environment->movePlayer(glm::vec3(dx, dy, dz));
+	}
 }
 
 void GameScreen::onMouseMove( MouseEvent e )

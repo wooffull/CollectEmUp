@@ -85,6 +85,7 @@
     <ClCompile Include="BoundingBox.cpp">
       <Filter>Source Files\Display\Util</Filter>
     </ClCompile>
+    <ClCompile Include="KeyboardMovableGO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExamplePrefabClass.h">
@@ -177,6 +178,7 @@
     <ClInclude Include="BoundingBox.h">
       <Filter>Header Files\Display\Util</Filter>
     </ClInclude>
+    <ClInclude Include="KeyboardMovableGO.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
