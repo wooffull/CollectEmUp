@@ -9,6 +9,7 @@
 #include "DisplayEvent.h"
 #include "Color.h"
 #include "Model.h"
+#include "BoundingBox.h"
 
 class GameObject :
 	public EventDispatcher
@@ -87,8 +88,8 @@ protected:
 	Color _color;
 	GLuint _programIndex;
 	Model* _model;
+	BoundingBox* _boundingBox;
 
 	GLint _offsetIndex;
 	GLint _scaleIndex;
 };
-

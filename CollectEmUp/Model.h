@@ -12,6 +12,8 @@ public:
 	virtual ~Model();
 
 	void draw();
+	
+	std::vector<GLfloat> getVertexBufferData();
 
 private:
 	GLuint _vboIndex;

@@ -5,6 +5,7 @@
 #include "ModelImporter.h"
 #include "DisplayEvent.h"
 #include "Camera.h"
+#include "KeyboardMovableGO.h"
 
 class Environment :
 	public GameObject
@@ -16,7 +17,9 @@ public:
 	virtual void update( float dt );
 
 	void turnCamera( float dx, float dy );
-	void moveCamera( float dx, float dy );
+	void moveCamera( float dx, float dy, float dz );
+
+	void movePlayer(glm::vec3 delta);
 
 	void applyGravity();
 	void applyDrag();
@@ -32,5 +35,6 @@ private:
 
 	glm::mat4 _worldMatrix;
 	Camera _camera;
+	KeyboardMovableGO* player;
 };
 

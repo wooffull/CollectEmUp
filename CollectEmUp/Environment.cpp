@@ -49,20 +49,28 @@ void Environment::turnCamera( float dx, float dy )
 {
 	_camera.turn( dx, dy );
 }
-void Environment::moveCamera( float dx, float dy )
+void Environment::moveCamera( float dx, float dy, float dz )
 {
 	glm::vec3 forward = _camera.getForward();
 	glm::vec3 right = _camera.getRight();
-	forward *= dy;
+	glm::vec3 up = _camera.getUp();
+	forward *= dz;
 	right *= -dx;
+	up *= dy;
 
-	glm::vec3 movement = forward + right;
+	glm::vec3 movement = forward + right + up;
 	movement /= movement.length();
 	movement *= 5.0f;
 
 	glm::vec3 newPosition = _camera.getPosition();
 	newPosition += movement;
 	_camera.setPosition( newPosition );
+}
+
+void Environment::movePlayer(glm::vec3 delta)
+{
+	float movementSpeed = 2.0f;
+	player->setPosition(player->getPosition() + delta*movementSpeed);
 }
 
 void Environment::applyGravity()
@@ -94,11 +102,12 @@ void Environment::onAdded( Event e )
 	// IMPORTANT: Model files are stored in the Models subfolder,
 	// and so their filenames must be prefixed with "Models/".
 	// Failure to do so will result in a memory error at runtime.
-	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/cube-texture.png" );
+	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/cube-texture.png" );
+	player = new KeyboardMovableGO("Models/cube.obj", "Models/Textures/cube-texture.png");
 	addChild( rotatingCube );
 	BlockPlatform* ground = new BlockPlatform(vec3(0, 0, 0), vec3(10, 1, 10));
 	addChild(ground);
-	
+	addChild( player );
 }
 
 void Environment::onRemoved( Event e )

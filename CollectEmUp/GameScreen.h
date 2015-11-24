@@ -5,6 +5,7 @@
 #include "GameException.h"
 #include "ShaderImporter.h"
 #include <iostream>
+#include <map>
 
 class GameScreen :
 	public IScreen
@@ -25,11 +26,8 @@ private:
 	Environment* _environment;
 	glm::vec2 _mousePos;
 	glm::vec2 _mouseDisplacement;
+	std::map<int, bool> _keysPressed;
 	bool _mouseIsDown;
-	bool _wKeyPressed;
-	bool _aKeyPressed;
-	bool _sKeyPressed;
-	bool _dKeyPressed;
 
 	void updateMouse( MouseEvent e );
 };

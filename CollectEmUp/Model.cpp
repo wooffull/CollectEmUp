@@ -56,3 +56,58 @@ void Model::draw()
 	// Have OpenGL draw using the currently bound buffer
 	glDrawElements( GL_TRIANGLES, 8 * _faceBufferData.size(), GL_UNSIGNED_SHORT, 0 );
 }
+
+/*
+std::vector<glm::vec3> Model::boundingBox(GLushort maxX, GLushort maxY, GLushort maxZ, GLushort minX, GLushort minY, GLushort minZ)
+{
+	//vector to contain the vec3s for each vertex in the bounding box
+	std::vector<glm::vec3> boxVectors;
+	
+	//data showing point connections and layout of bounding box
+	
+	point 1 connects to: point 2, point 3, point 5
+	point 2 connects to: point 1, point 4, point 6
+	point 3 connects to: point 1, point 4, point 7
+	point 4 connects to: point 2, point 3, point 8
+	point 5 connects to: point 1, point 6, point 7
+	point 6 connects to: point 2, point 5, point 8
+	point 7 connects to: point 3, point 5, point 8
+	point 8 connects to: point 4, point 6, point 7
+	
+
+	//top square
+	// (maxX, maxY, maxZ)
+	glm::vec3 point1 = glm::vec3(maxX, maxY, maxZ);
+	boxVectors.push_back(point1);
+	// (minX, maxY, maxZ)
+	glm::vec3 point2 = glm::vec3(minX, maxY, maxZ);
+	boxVectors.push_back(point2);
+	// (maxX, maxY, minZ)
+	glm::vec3 point3 = glm::vec3(maxX, maxY, minZ);
+	boxVectors.push_back(point3);
+	// (minX, maxY, minZ)
+	glm::vec3 point4 = glm::vec3(minX, maxY, minZ);	
+	boxVectors.push_back(point4);
+
+	//bottom square
+	// (maxX, minY, maxZ)
+	glm::vec3 point5 = glm::vec3(maxX, minY, maxZ);
+	boxVectors.push_back(point5);
+	// (minX, minY, maxZ)
+	glm::vec3 point6 = glm::vec3(minX, minY, maxZ);
+	boxVectors.push_back(point6);
+	// (maxX, minY, minZ)
+	glm::vec3 point7 = glm::vec3(maxX, minY, minZ);
+	boxVectors.push_back(point7);
+	// (minX, minY, minZ)
+	glm::vec3 point8 = glm::vec3(minX, minY, minZ);
+	boxVectors.push_back(point8);
+
+	return boxVectors;
+}
+*/
+
+std::vector<GLfloat> Model::getVertexBufferData()
+{
+	return _vertexBufferData;
+}

@@ -85,6 +85,10 @@
     <ClCompile Include="ExamplePrefabClass.cpp">
       <Filter>Source Files\Prefabs</Filter>
     </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
+      <Filter>Source Files\Display\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardMovableGO.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -177,6 +181,10 @@
     <ClInclude Include="ExamplePrefabClass.h">
       <Filter>Header Files\Prefabs</Filter>
     </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Header Files\Display\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardMovableGO.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -238,6 +246,11 @@
     </Filter>
     <Filter Include="Source Files\Prefabs">
       <UniqueIdentifier>{2dd4c24c-647a-491a-a0fe-c262665b0c06}</UniqueIdentifier>
+    <Filter Include="Source Files\Display\Util">
+      <UniqueIdentifier>{bd322429-f9d0-4063-a497-b3be65a2b9fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Display\Util">
+      <UniqueIdentifier>{a489efc9-1930-49e3-a3eb-5d0241c9391e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
