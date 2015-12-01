@@ -1,7 +1,7 @@
 #include "Camera.h"
 
-const float& Camera::TURN_SENSITIVITY_X = 0.0075f;
-const float& Camera::TURN_SENSITIVITY_Y = 0.0075f;
+const float& Camera::TURN_SENSITIVITY_Y = 0.025f;
+const float& Camera::TURN_SENSITIVITY_X = 0.025f;
 
 Camera::Camera() :
     GameObject()

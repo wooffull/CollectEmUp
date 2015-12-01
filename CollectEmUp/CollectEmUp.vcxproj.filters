@@ -1,11 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameException.h">
       <Filter>Header Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\Core</Filter>
@@ -25,6 +26,9 @@
     <ClCompile Include="Model.cpp">
       <Filter>Source Files\Display</Filter>
     </ClCompile>
+    <ClCompile Include="DisplayEvent.cpp">
+      <Filter>Source Files\Event</Filter>
+    </ClCompile>
     <ClCompile Include="Event.cpp">
       <Filter>Source Files\Event</Filter>
     </ClCompile>
@@ -32,6 +36,9 @@
       <Filter>Source Files\Event</Filter>
     </ClCompile>
     <ClCompile Include="GameEvent.cpp">
+      <Filter>Source Files\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardEvent.cpp">
       <Filter>Source Files\Event</Filter>
     </ClCompile>
     <ClCompile Include="MouseEvent.cpp">
@@ -45,6 +52,12 @@
     </ClCompile>
     <ClCompile Include="GameScreen.cpp">
       <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderHelper.cpp">
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="FileImportData.cpp">
       <Filter>Source Files\Util\ImportData</Filter>
@@ -64,33 +77,23 @@
     <ClCompile Include="ShaderImporter.cpp">
       <Filter>Source Files\Util\Importers</Filter>
     </ClCompile>
-    <ClCompile Include="Random.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderHelper.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="DisplayEvent.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardEvent.cpp">
-      <Filter>Source Files\Event</Filter>
-    </ClCompile>
     <ClCompile Include="BlockPlatform.cpp">
-      <Filter>Source Files\Prefabs</Filter>
+      <Filter>Source Files\Misc</Filter>
     </ClCompile>
     <ClCompile Include="ExamplePrefabClass.cpp">
-      <Filter>Source Files\Prefabs</Filter>
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardMovableGO.cpp">
+      <Filter>Source Files\Misc</Filter>
     </ClCompile>
     <ClCompile Include="BoundingBox.cpp">
       <Filter>Source Files\Display\Util</Filter>
     </ClCompile>
-    <ClCompile Include="KeyboardMovableGO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -112,6 +115,9 @@
     <ClInclude Include="Model.h">
       <Filter>Header Files\Display</Filter>
     </ClInclude>
+    <ClInclude Include="DisplayEvent.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
     <ClInclude Include="Event.h">
       <Filter>Header Files\Event</Filter>
     </ClInclude>
@@ -122,6 +128,9 @@
       <Filter>Header Files\Event</Filter>
     </ClInclude>
     <ClInclude Include="IEventDispatcher.h">
+      <Filter>Header Files\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardEvent.h">
       <Filter>Header Files\Event</Filter>
     </ClInclude>
     <ClInclude Include="MouseEvent.h">
@@ -138,6 +147,12 @@
     </ClInclude>
     <ClInclude Include="GameScreen.h">
       <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderHelper.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="FileImportData.h">
       <Filter>Header Files\Util\ImportData</Filter>
@@ -160,97 +175,79 @@
     <ClInclude Include="ShaderImporter.h">
       <Filter>Header Files\Util\Importers</Filter>
     </ClInclude>
-    <ClInclude Include="Random.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderHelper.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="DisplayEvent.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardEvent.h">
-      <Filter>Header Files\Event</Filter>
-    </ClInclude>
-    <ClInclude Include="BlockPlatform.h">
-      <Filter>Header Files\Prefabs</Filter>
+    <ClInclude Include="KeyboardMovableGO.h">
+      <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="ExamplePrefabClass.h">
-      <Filter>Header Files\Prefabs</Filter>
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockPlatform.h">
+      <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="BoundingBox.h">
       <Filter>Header Files\Display\Util</Filter>
     </ClInclude>
-    <ClInclude Include="KeyboardMovableGO.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{0097242d-acde-4b47-923e-6164064ea0ca}</UniqueIdentifier>
+      <UniqueIdentifier>{4dc6cb14-7907-4787-b986-65771314e402}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{21f6450f-fde5-4889-9ac7-e0f434346765}</UniqueIdentifier>
+      <UniqueIdentifier>{ef6300e8-722c-41cb-9e46-87712889f759}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Core">
-      <UniqueIdentifier>{86f9dcf4-9b48-4a58-98cd-72ec40495aff}</UniqueIdentifier>
+      <UniqueIdentifier>{c6e46994-9df5-4754-88c5-2051bf8fa6a2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Display">
-      <UniqueIdentifier>{697f9435-cd84-4af6-b23d-6557e28b1a3e}</UniqueIdentifier>
+      <UniqueIdentifier>{e487f881-6e66-4385-8a58-cb6ee6ecc412}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Event">
-      <UniqueIdentifier>{0ee0fa42-e334-44c9-bbb5-f0f0355ba1dc}</UniqueIdentifier>
+      <UniqueIdentifier>{9b394925-1896-4a8e-b64c-afd6f463cdf6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Misc">
-      <UniqueIdentifier>{39d0a503-1b5a-48b7-b194-2258f5c60964}</UniqueIdentifier>
+      <UniqueIdentifier>{0b8579ec-bd76-4ea0-857a-6044b07baa19}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Util">
-      <UniqueIdentifier>{e82354a1-d774-4764-a996-d54af9d3817a}</UniqueIdentifier>
+      <UniqueIdentifier>{250d73da-a7a6-4713-8c8b-d9b139f4c3f7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Event\Util">
-      <UniqueIdentifier>{27784810-896d-435b-bfc8-63bc332b2135}</UniqueIdentifier>
+      <UniqueIdentifier>{bcaee64e-9844-4902-8d5c-1391d0d204ca}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Util\ImportData">
-      <UniqueIdentifier>{b67b3f16-dfe7-4ba5-a451-bd61a6cf567e}</UniqueIdentifier>
+      <UniqueIdentifier>{ba1e9304-3938-4d09-8e3f-09f211fb1411}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Util\Importers">
-      <UniqueIdentifier>{3dd8ddd5-db8e-4936-b437-7cff15321c63}</UniqueIdentifier>
+      <UniqueIdentifier>{d87c6a70-0f97-490b-8cea-53e6c689a8e7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Core">
-      <UniqueIdentifier>{32489c59-5973-47e8-a3ac-9a7f06488feb}</UniqueIdentifier>
+      <UniqueIdentifier>{37b43732-b738-423c-bcb1-6214c1d7b92a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Display">
-      <UniqueIdentifier>{e21cb687-c17f-45a9-ad28-754aad150539}</UniqueIdentifier>
+      <UniqueIdentifier>{bbe67625-e14d-4575-81a2-2d153b47f326}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Event">
-      <UniqueIdentifier>{4a9c1563-d30f-4d8d-9ba3-b84005c1663b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Event\Util">
-      <UniqueIdentifier>{36353562-0cd4-42ac-88a9-985ae16d2cd4}</UniqueIdentifier>
+      <UniqueIdentifier>{e4786376-5577-488d-a595-24dae6676a0f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Misc">
-      <UniqueIdentifier>{3ff97a10-8cf8-4b9f-8788-9e636d1749b9}</UniqueIdentifier>
+      <UniqueIdentifier>{6fe4d1fa-9d48-4f42-a6c6-1eec92fe5026}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Util">
-      <UniqueIdentifier>{fc1b2dd0-dbd0-493c-b1fa-9cef3b43fa36}</UniqueIdentifier>
+      <UniqueIdentifier>{e8ebc65d-569d-4292-bbcc-06ab65b99d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Event\Util">
+      <UniqueIdentifier>{c8dc7f73-4ba2-4dd1-acc4-ca8da6315960}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Util\ImportData">
-      <UniqueIdentifier>{65e6264c-da50-403c-a262-7e83578b9fe9}</UniqueIdentifier>
+      <UniqueIdentifier>{9fe0d270-d226-4aaa-89f7-f7e3f3430b05}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Util\Importers">
-      <UniqueIdentifier>{2e17e953-2ecd-4b7a-b05f-ea258c133560}</UniqueIdentifier>
+      <UniqueIdentifier>{3127058d-0042-46d6-864d-28b9171d6d6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Prefabs">
-      <UniqueIdentifier>{3b7b369d-2914-4fc1-bedb-f8067a21c4cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Prefabs">
-      <UniqueIdentifier>{2dd4c24c-647a-491a-a0fe-c262665b0c06}</UniqueIdentifier>
     <Filter Include="Source Files\Display\Util">
-      <UniqueIdentifier>{bd322429-f9d0-4063-a497-b3be65a2b9fd}</UniqueIdentifier>
+      <UniqueIdentifier>{f3138f3e-959b-444a-aa17-232090a02762}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Display\Util">
-      <UniqueIdentifier>{a489efc9-1930-49e3-a3eb-5d0241c9391e}</UniqueIdentifier>
+      <UniqueIdentifier>{c44095ef-9e78-4f47-a5e1-8de27f16876b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

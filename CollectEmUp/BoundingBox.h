@@ -11,11 +11,11 @@ public:
 	BoundingBox();
 	~BoundingBox();
 
-	BoundingBox(GLushort maxX, GLushort maxY, GLushort maxZ, GLushort minX, GLushort minY, GLushort minZ);
+	BoundingBox( GLushort maxX, GLushort maxY, GLushort maxZ, GLushort minX, GLushort minY, GLushort minZ );
 
-	static BoundingBox createFromModel(Model* model);
+	static BoundingBox createFromModel( Model* model );
 
-	//draw method for debugging goes here
+	// Draw method for debugging goes here
 
 private:
 	GLushort _maxX;

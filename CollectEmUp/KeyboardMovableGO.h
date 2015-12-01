@@ -9,10 +9,10 @@ class KeyboardMovableGO :
 	public GameObject
 {
 public:
-	KeyboardMovableGO(char* modelFilePath, char* textureFilePath);
+	KeyboardMovableGO( char* modelFilePath, char* textureFilePath );
 	~KeyboardMovableGO();
 
-	virtual void update(float dt);
-	virtual void draw(float dt);
+	virtual void update( float dt );
+	virtual void draw( float dt );
 };
 

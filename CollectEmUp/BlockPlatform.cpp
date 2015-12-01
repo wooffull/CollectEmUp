@@ -1,26 +1,26 @@
 #include "BlockPlatform.h"
 
-BlockPlatform::BlockPlatform(vec3 position, vec3 scale)
+BlockPlatform::BlockPlatform( vec3 position, vec3 scale )
 {
 	ModelImporter modelImporter;
-	setModel(modelImporter.loadModel("Models/cube.obj", "Models/Textures/cube-texture.png"));
+	setModel( modelImporter.loadModel( "Models/cube.obj", "Models/Textures/cube-texture.png" ) );
 
-	setPosition(position);
-	setColor(0.5f, 0.3f, 0.5f);
-	setScale(scale);
-	setFixed(true);
+	setPosition( position );
+	setColor( 0.5f, 0.3f, 0.5f );
+	setScale( scale );
+	setFixed( true );
 }
 
 BlockPlatform::~BlockPlatform()
 {
 }
 
-void BlockPlatform::update(float dt)
+void BlockPlatform::update( float dt )
 {
-	GameObject::update(dt);
+	GameObject::update( dt );
 }
 
-void BlockPlatform::draw(float dt)
+void BlockPlatform::draw( float dt )
 {
-	GameObject::draw(dt);
+	GameObject::draw( dt );
 }

@@ -9,10 +9,10 @@ class BlockPlatform :
 {
 private:
 public:
-	BlockPlatform(vec3 position, vec3 scale);
+	BlockPlatform( vec3 position, vec3 scale );
 	~BlockPlatform();
 
 	virtual void update( float dt );
-	virtual void draw(float dt);
+	virtual void draw( float dt );
 };
 

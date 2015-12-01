@@ -67,10 +67,10 @@ void Environment::moveCamera( float dx, float dy, float dz )
 	_camera.setPosition( newPosition );
 }
 
-void Environment::movePlayer(glm::vec3 delta)
+void Environment::movePlayer( glm::vec3 delta )
 {
 	float movementSpeed = 2.0f;
-	player->setPosition(player->getPosition() + delta*movementSpeed);
+	player->setPosition( player->getPosition() + delta * movementSpeed );
 }
 
 void Environment::applyGravity()
@@ -103,10 +103,10 @@ void Environment::onAdded( Event e )
 	// and so their filenames must be prefixed with "Models/".
 	// Failure to do so will result in a memory error at runtime.
 	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/cube-texture.png" );
-	player = new KeyboardMovableGO("Models/cube.obj", "Models/Textures/cube-texture.png");
+	player = new KeyboardMovableGO( "Models/cube.obj", "Models/Textures/cube-texture.png" );
 	addChild( rotatingCube );
-	BlockPlatform* ground = new BlockPlatform(vec3(0, 0, 0), vec3(10, 1, 10));
-	addChild(ground);
+	BlockPlatform* ground = new BlockPlatform( vec3( 0, 0, 0 ), vec3( 10, 1, 10 ) );
+	addChild( ground );
 	addChild( player );
 }
 
