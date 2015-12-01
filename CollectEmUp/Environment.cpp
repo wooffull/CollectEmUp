@@ -25,6 +25,9 @@ Environment::Environment()
 	_worldMatrix = glm::one<glm::mat4>();
 	_camera.setPosition( glm::vec3( 0, 0, 1 ) );
 	addChild( &_camera );
+	turnCamera(0, 0);
+	//Initial camera rotation: 180 degrees x to center player's inital position, -10 degrees down to create a nice offset
+	turnCamera(glm::pi<float>(), -15*glm::pi<float>()/180.0f);
 }
 
 Environment::~Environment()
@@ -43,14 +46,25 @@ void Environment::update( float dt )
 	setShaderMatrix( _programIndex, "viewMatrix", viewMatrix );
 
 	GameObject::update( dt );
+
+	//Setting camera to proper pos/rot for following player
+	_camera.setPosition(player->getPosition() - player->forward*2.0f + glm::vec3(0, 1, 0));
+	if (turnAmount != 0)
+	{
+		//Player is turning, turn cam to match
+		_camera.turn(turnAmount, 0);
+		turnAmount = 0;
+	}
 }
 
-void Environment::turnCamera( float dx, float dy )
+void Environment::turnCamera(float dx, float dy)
 {
-	_camera.turn( dx, dy );
+	_camera.turn(dx, dy);
+	glm::vec3 camForward = _camera.getForward();
 }
 void Environment::moveCamera( float dx, float dy, float dz )
 {
+	//Deprecated code -- do not use
 	glm::vec3 forward = _camera.getForward();
 	glm::vec3 right = _camera.getRight();
 	glm::vec3 up = _camera.getUp();
@@ -69,8 +83,9 @@ void Environment::moveCamera( float dx, float dy, float dz )
 
 void Environment::movePlayer( glm::vec3 delta )
 {
-	float movementSpeed = 2.0f;
-	player->setPosition( player->getPosition() + delta * movementSpeed );
+	delta *= 1.5f;
+	player->setInput(delta);
+	turnAmount = -1*delta.x;
 }
 
 void Environment::applyGravity()
@@ -105,7 +120,7 @@ void Environment::onAdded( Event e )
 	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/cube-texture.png" );
 	player = new KeyboardMovableGO( "Models/cube.obj", "Models/Textures/cube-texture.png" );
 	addChild( rotatingCube );
-	BlockPlatform* ground = new BlockPlatform( vec3( 0, 0, 0 ), vec3( 10, 1, 10 ) );
+	BlockPlatform* ground = new BlockPlatform( vec3( 0, -1, 0 ), vec3( 10, 1, 10 ) );
 	addChild( ground );
 	addChild( player );
 }

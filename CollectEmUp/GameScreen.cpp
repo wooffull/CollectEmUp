@@ -34,61 +34,27 @@ void GameScreen::update( float dt )
 	GameObject::update( dt );
 
 	float dx = 0;
-	float dy = 0;
 	float dz = 0;
-
-	if(_keysPressed[GLFW_KEY_W])
+	if (_keysPressed[GLFW_KEY_W])
 	{
 		dz += dt;
 	}
-	if(_keysPressed[GLFW_KEY_S])
-	{
-		dz -= dt;
-	}
-	if(_keysPressed[GLFW_KEY_A])
-	{
-		dx -= dt;
-	}
-	if(_keysPressed[GLFW_KEY_D])
+	if (_keysPressed[GLFW_KEY_A])
 	{
 		dx += dt;
 	}
-	if (_keysPressed[GLFW_KEY_SPACE])
-	{
-		dy += dt;
-	}
-	if (_keysPressed[GLFW_KEY_LEFT_SHIFT])
-	{
-		dy -= dt;
-	}
-
-	if( dx != 0 || dy != 0 || dz != 0 )
-	{
-		_environment->moveCamera( dx, dy, dz );
-	}
-
-	dx = 0;
-	dy = 0;
-	dz = 0;
-	if (_keysPressed[GLFW_KEY_UP])
-	{
-		dz += dt;
-	}
-	if (_keysPressed[GLFW_KEY_LEFT])
-	{
-		dx += dt;
-	}
-	if (_keysPressed[GLFW_KEY_DOWN])
+	if (_keysPressed[GLFW_KEY_S])
 	{
 		dz -= dt;
 	}
-	if (_keysPressed[GLFW_KEY_RIGHT])
+	if (_keysPressed[GLFW_KEY_D])
 	{
 		dx -= dt;
 	}
-	if (dx != 0 || dy != 0 || dz != 0)
+
+	if (dx != 0 || dz != 0)
 	{
-		_environment->movePlayer(glm::vec3(dx, dy, dz));
+		_environment->movePlayer(glm::vec3(dx, 0, dz));
 	}
 }
 
@@ -96,7 +62,7 @@ void GameScreen::onMouseMove( MouseEvent e )
 {
 	updateMouse( e );
 
-	_environment->turnCamera( e.getDx(), e.getDy() );
+	//_environment->turnCamera( e.getDx(), e.getDy() );
 }
 void GameScreen::onMouseDown( MouseEvent e )
 {

@@ -33,6 +33,8 @@ private:
 	static const float& FRICTION;
 	static const float& DEFLECT_PERCENTAGE;
 
+	float turnAmount;
+
 	glm::mat4 _worldMatrix;
 	Camera _camera;
 	KeyboardMovableGO* player;

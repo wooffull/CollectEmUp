@@ -8,11 +8,18 @@
 class KeyboardMovableGO :
 	public GameObject
 {
+private:
+	glm::vec3 inputData;
+	float movementSpeed = 2;
+
 public:
+	glm::vec3 forward;
 	KeyboardMovableGO( char* modelFilePath, char* textureFilePath );
 	~KeyboardMovableGO();
 
 	virtual void update( float dt );
 	virtual void draw( float dt );
+
+	void setInput( glm::vec3 );
 };
 

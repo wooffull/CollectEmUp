@@ -1,7 +1,8 @@
 #include "Camera.h"
 
-const float& Camera::TURN_SENSITIVITY_Y = 0.025f;
-const float& Camera::TURN_SENSITIVITY_X = 0.025f;
+//In the future, handle sensitivity in the input methods. Having dx and dy in turn be an accurate reflection of the degrees that will be turned is important.
+const float& Camera::TURN_SENSITIVITY_Y = 1.0f;//0.025f;
+const float& Camera::TURN_SENSITIVITY_X = 1.0f;// 0.025f;
 
 Camera::Camera() :
     GameObject()
