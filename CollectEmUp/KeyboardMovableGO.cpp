@@ -11,7 +11,8 @@ KeyboardMovableGO::KeyboardMovableGO(char* modelFilePath, char* textureFilePath)
 	setColor(0.5f, 0.3f, 0.5f);
 	setScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	setRotationAxis(glm::vec3(0, 1, 0));
-	setFixed(true);
+	setFixed(false);
+	setAcceleration(glm::vec3(0, -1, 0));
 }
 
 
@@ -27,6 +28,12 @@ void KeyboardMovableGO::update(float dt)
 		setRotation(_rotation + deltaRot);
 		forward = glm::vec3(sin(_rotation), 0, cos(_rotation));
 	}
+	if (onGround && inputData.y != 0)
+	{
+		onGround = false;
+		_velocity.y = 5;
+		_acceleration.y = -1;
+	}
 
 	glm::vec3 deltaPos = forward*inputData.z;
 	setPosition(_position + deltaPos*movementSpeed);
@@ -34,6 +41,13 @@ void KeyboardMovableGO::update(float dt)
 	GameObject::update(dt);
 
 	inputData = glm::vec3(0, 0, 0);
+	if (!onGround && _position.y <= 0)
+	{
+		_position.y = 0;
+		_velocity.y = 0;
+		_acceleration.y = 0;
+		onGround = true;
+	}
 }
 
 void KeyboardMovableGO::draw(float dt)

@@ -11,6 +11,7 @@ class KeyboardMovableGO :
 private:
 	glm::vec3 inputData;
 	float movementSpeed = 2;
+	bool onGround;
 
 public:
 	glm::vec3 forward;

@@ -34,6 +34,7 @@ void GameScreen::update( float dt )
 	GameObject::update( dt );
 
 	float dx = 0;
+	float dy = 0;
 	float dz = 0;
 	if (_keysPressed[GLFW_KEY_W])
 	{
@@ -51,10 +52,14 @@ void GameScreen::update( float dt )
 	{
 		dx -= dt;
 	}
-
-	if (dx != 0 || dz != 0)
+	if (_keysPressed[GLFW_KEY_SPACE])
 	{
-		_environment->movePlayer(glm::vec3(dx, 0, dz));
+		dy += dt;
+	}
+
+	if (dx != 0 || dy != 0 || dz != 0)
+	{
+		_environment->movePlayer(glm::vec3(dx, dy, dz));
 	}
 }
 
