@@ -51,6 +51,7 @@ public:
     void setBackBottomRightNode( OctTreeNode* value );
 
 	void checkCollisions();
+	void checkCollisions(GameObject* other);
 
 private:
 	GameObject* _gameObject;

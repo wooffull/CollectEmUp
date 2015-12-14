@@ -1,6 +1,7 @@
 #include "BlockPlatform.h"
 
-BlockPlatform::BlockPlatform( vec3 position, vec3 scale )
+BlockPlatform::BlockPlatform( vec3 position, vec3 scale ) :
+	GameObject()
 {
 	ModelImporter modelImporter;
 	setModel( modelImporter.loadModel( "Models/cube.obj", "Models/Textures/cube-texture.png" ) );

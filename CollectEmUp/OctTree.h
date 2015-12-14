@@ -14,6 +14,7 @@ public:
     void draw();
     bool collidesWith( GameObject* otherColliderPtr );
 	void checkCollisions();
+	void checkCollisions(GameObject* other);
     void add( GameObject* otherColliderPtr );
 
     OctTreeNode* getRoot();

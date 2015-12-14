@@ -65,7 +65,7 @@ void Environment::update( float dt )
 	GameObject::update( dt );
 
     // Check for collisions
-	_octTree->checkCollisions();
+	_octTree->checkCollisions( _player );
 	/*
     auto begin = _children->begin();
     auto end = _children->end();
@@ -90,12 +90,11 @@ void Environment::draw( float dt )
 {
     GameObject::draw( dt );
 
-    _octTree->draw();
+    //_octTree->draw();
 }
 
 void Environment::addChild( GameObject* child )
 {
-	std::cout << child << std::endl;
     GameObject::addChild( child );
 
     if( child != &_camera )
@@ -179,15 +178,16 @@ void Environment::onAdded( Event e )
 	std::vector<GameObject*> level1Objects = _lvl1->getLevelObjects();
 	for (size_t i = 0; i < level1Objects.size(); ++i)
 	{
-		std::cout << "adding child" << std::endl;
 		level1Objects[i]->update( 0 );
 		addChild(level1Objects[i]);
 	}
 
 	_player = new KeyboardMovableGO( "Models/cube.obj", "Models/Textures/cube-texture.png" );
-    _player->setPosition( glm::vec3( 0, 0, 1 ) );
+    _player->setPosition( glm::vec3( 0, 2, 1 ) );
     _player->update( 0 );
 	addChild( _player );
+
+	_camera.setPosition(_player->getPosition() - glm::vec3(0, 0, 1));
 
     // Make camera point at player!
     glm::vec3 displacement = _player->getPosition() - _camera.getPosition();

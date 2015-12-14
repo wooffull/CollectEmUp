@@ -3,9 +3,9 @@
 OctTreeNode::OctTreeNode( glm::vec3 center, glm::vec3 halfWidths )
 {
 	_gameObject = new GameObject();
+	_gameObject->setPosition(center);
 
 	BoundingBox* nodeBox = _gameObject->getBoundingBox();
-    nodeBox = new BoundingBox();
     nodeBox->setCenter( center );
     nodeBox->setHalfWidthX( halfWidths.x );
     nodeBox->setHalfWidthY( halfWidths.y );
@@ -111,9 +111,7 @@ void OctTreeNode::draw()
     {
         if( child != nullptr )
         {
-			BoundingBox* childBox = child->getGameObject()->getBoundingBox();
-
-			childBox->draw();
+			child->draw();
         }
     }
 }
@@ -188,6 +186,33 @@ void OctTreeNode::checkCollisions()
 		for (unsigned int i = 0; i < _nodes.size(); i++)
 		{
 			_nodes[i]->checkCollisions();
+		}
+	}
+}
+
+void OctTreeNode::checkCollisions(GameObject* other)
+{
+	if (isLeaf())
+	{
+		for (unsigned int i = 0; i < _containedChildren.size(); i++)
+		{
+			if (_containedChildren[i] == nullptr && _containedChildren[i] != other)
+			{
+				continue;
+			}
+
+			if (_containedChildren[i]->collidesWith(other))
+			{
+				_containedChildren[i]->handleCollision(other);
+				other->handleCollision(_containedChildren[i]);
+			}
+		}
+	}
+	else
+	{
+		for (unsigned int i = 0; i < _nodes.size(); i++)
+		{
+			_nodes[i]->checkCollisions( other );
 		}
 	}
 }

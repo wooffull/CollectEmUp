@@ -51,3 +51,7 @@ void OctTree::checkCollisions()
 {
 	_root->checkCollisions();
 }
+void OctTree::checkCollisions(GameObject* other)
+{
+	_root->checkCollisions(other);
+}
