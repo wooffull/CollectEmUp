@@ -172,7 +172,11 @@ void Environment::onAdded( Event e )
     ground->update( 0 );
 	addChild( ground );
 
-	ground = new BlockPlatform(vec3(0, -1, 12), vec3(10, 1, 10));
+	ground = new BlockPlatform(vec3(0, 1, 12), vec3(10, 1, 10));
+	ground->update(0);
+	addChild(ground);
+
+	ground = new BlockPlatform(vec3(0, -3, 12), vec3(10, 1, 10));
 	ground->update(0);
 	addChild(ground);
 
