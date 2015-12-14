@@ -14,6 +14,7 @@
     <ClCompile Include="BlockPlatform.cpp" />
     <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="DirectLightSource.cpp" />
     <ClCompile Include="DispatcherCallbackMap.cpp" />
@@ -32,6 +33,7 @@
     <ClCompile Include="ImportData.cpp" />
     <ClCompile Include="KeyboardEvent.cpp" />
     <ClCompile Include="KeyboardMovableGO.cpp" />
+    <ClCompile Include="Level1.cpp" />
     <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -49,6 +51,7 @@
     <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="Callback.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collectable.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="DirectLightSource.h" />
     <ClInclude Include="DispatcherCallbackMap.h" />
@@ -69,6 +72,7 @@
     <ClInclude Include="IScreen.h" />
     <ClInclude Include="KeyboardEvent.h" />
     <ClInclude Include="KeyboardMovableGO.h" />
+    <ClInclude Include="Level1.h" />
     <ClInclude Include="LightSource.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelImportData.h" />

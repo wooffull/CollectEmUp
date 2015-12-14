@@ -9,6 +9,7 @@
 #include "OctTree.h"
 #include "ExamplePrefabClass.h"
 #include "BlockPlatform.h"
+#include "Level1.h"
 
 class Environment :
     public GameObject
@@ -39,6 +40,7 @@ private:
     static const float& FRICTION;
     static const float& DEFLECT_PERCENTAGE;
 
+	Level1* _lvl1;
     glm::mat4 _worldMatrix;
     Camera _camera;
     OctTree* _octTree;

@@ -37,6 +37,7 @@ void KeyboardMovableGO::update( float dt )
     GameObject::update( dt );
 
     _inputData = glm::vec3( 0, 0, 0 );
+
     if( !_onGround && _position.y <= 0 )
     {
         _position.y = 0;

@@ -39,6 +39,7 @@ Environment::Environment()
 Environment::~Environment()
 {
     delete _octTree;
+	delete _lvl1;
 }
 
 void Environment::update( float dt )
@@ -92,6 +93,7 @@ void Environment::draw( float dt )
 
 void Environment::addChild( GameObject* child )
 {
+	std::cout << child << std::endl;
     GameObject::addChild( child );
 
     if( child != &_camera )
@@ -162,15 +164,26 @@ void Environment::onAdded( Event e )
 	// IMPORTANT: Model files are stored in the Models subfolder,
 	// and so their filenames must be prefixed with "Models/".
 	// Failure to do so will result in a memory error at runtime.
-	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/cube-texture.png" );
-    rotatingCube->update( 0 );
-	addChild( rotatingCube );
 
-	BlockPlatform* ground = new BlockPlatform( vec3( 0, -1, 0 ), vec3( 10, 1, 10 ) );
-    ground->update( 0 );
-	addChild( ground );
 
-    _player = new KeyboardMovableGO( "Models/cube.obj", "Models/Textures/cube-texture.png" );
+	//ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/cube-texture.png" );
+ //   rotatingCube->update( 0 );
+	//addChild( rotatingCube );
+
+	//BlockPlatform* ground = new BlockPlatform( vec3( 0, -1, 0 ), vec3( 10, 1, 10 ) );
+ //   ground->update( 0 );
+	//addChild( ground );
+
+	_lvl1 = new Level1();
+	std::vector<GameObject*> level1Objects = _lvl1->getLevelObjects();
+	for (size_t i = 0; i < level1Objects.size(); ++i)
+	{
+		std::cout << "adding child" << std::endl;
+		level1Objects[i]->update( 0 );
+		addChild(level1Objects[i]);
+	}
+
+	_player = new KeyboardMovableGO( "Models/cube.obj", "Models/Textures/cube-texture.png" );
     _player->setPosition( glm::vec3( 0, 0, 1 ) );
     _player->update( 0 );
 	addChild( _player );
