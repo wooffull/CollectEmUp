@@ -27,7 +27,7 @@ void OctTree::draw()
     }
 }
 
-bool OctTree::collidesWith( BoundingBox* other )
+bool OctTree::collidesWith( GameObject* other )
 {
     if( _root == nullptr )
     {
@@ -37,7 +37,7 @@ bool OctTree::collidesWith( BoundingBox* other )
     return _root->collidesWith( other );
 }
 
-void OctTree::add( BoundingBox* other )
+void OctTree::add( GameObject* other )
 {
     _root->add( other );
 }
@@ -45,4 +45,9 @@ void OctTree::add( BoundingBox* other )
 OctTreeNode* OctTree::getRoot()
 {
     return _root;
+}
+
+void OctTree::checkCollisions()
+{
+	_root->checkCollisions();
 }

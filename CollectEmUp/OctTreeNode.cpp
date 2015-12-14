@@ -2,77 +2,82 @@
 
 OctTreeNode::OctTreeNode( glm::vec3 center, glm::vec3 halfWidths )
 {
-    _boundingBox = new BoundingBox();
-    _boundingBox->setCenter( center );
-    _boundingBox->setHalfWidthX( halfWidths.x );
-    _boundingBox->setHalfWidthY( halfWidths.y );
-    _boundingBox->setHalfWidthZ( halfWidths.z );
+	_gameObject = new GameObject();
 
-    _containedBoundingBoxes = std::vector<BoundingBox*>( CAPACITY );
-    _children = std::vector<OctTreeNode*>( CAPACITY );
+	BoundingBox* nodeBox = _gameObject->getBoundingBox();
+    nodeBox = new BoundingBox();
+    nodeBox->setCenter( center );
+    nodeBox->setHalfWidthX( halfWidths.x );
+    nodeBox->setHalfWidthY( halfWidths.y );
+    nodeBox->setHalfWidthZ( halfWidths.z );
+
+	_containedChildren = std::vector<GameObject*>( CAPACITY );
+    _nodes = std::vector<OctTreeNode*>( CAPACITY );
 
     _count = 0;
     _isLeaf = true;
 
     for( int i = 0; i < CAPACITY; i++ )
     {
-        _containedBoundingBoxes[i] = nullptr;
+		_containedChildren[i] = nullptr;
     }
 
-    for( unsigned i = 0; i < _children.size(); i++ )
+    for( unsigned i = 0; i < _nodes.size(); i++ )
     {
-        _children[i] = nullptr;
+        _nodes[i] = nullptr;
     }
 }
 
 OctTreeNode::~OctTreeNode()
 {
-    for( unsigned i = 0; i < _children.size(); i++ )
+    for( unsigned i = 0; i < _nodes.size(); i++ )
     {
-        if( _children[i] != nullptr )
+        if( _nodes[i] != nullptr )
         {
-            delete _children[i];
+            delete _nodes[i];
         }
     }
+
+	delete _gameObject;
 }
 
 void OctTreeNode::print()
 {
     std::cout << std::fixed << std::setprecision( 2 ) << "OctTreeNode: " << std::endl;
     std::cout << "Bounding Box:" << std::endl;
-    _boundingBox->print();
+    _gameObject->getBoundingBox()->print();
 
     std::cout << std::endl;
 
     std::cout << "Colliders: " << _count << std::endl;
 
-    for each( BoundingBox* boundingBox in _containedBoundingBoxes )
+    for each( GameObject* child in _containedChildren )
     {
-        if( boundingBox != nullptr )
+        if( child != nullptr )
         {
-            boundingBox->print();
+			child->getBoundingBox()->print();
         }
     }
 
     std::cout << std::endl;
 
-    std::cout << "Children: " << std::endl;
+    std::cout << "Nodes: " << std::endl;
 
     std::vector<std::string> nodeNames =
     {
-        "Front Top Left Child",
-        "Front Top Right Child",
-        "Front Bottom Left Child",
-        "Front Bottom Right Child",
-        "Back Top Left Child",
-        "Back Top Right Child",
-        "Back Bottom Left Child",
-        "Back Bottom Right Child"
+        "Front Top Left Node",
+        "Front Top Right Node",
+        "Front Bottom Left Node",
+        "Front Bottom Right Node",
+        "Back Top Left Node",
+        "Back Top Right Node",
+        "Back Bottom Left Node",
+        "Back Bottom Right Node"
     };
 
-    for( unsigned i = 0; i < _children.size(); i++ )
+    for( unsigned i = 0; i < _nodes.size(); i++ )
     {
-        OctTreeNode* child = _children[i];
+        OctTreeNode* child = _nodes[i];
 
         if( child == nullptr )
         {
@@ -90,29 +95,33 @@ void OctTreeNode::print()
 
 void OctTreeNode::draw()
 {
-    _boundingBox->draw();
+    _gameObject->getBoundingBox()->draw();
 
-    for each( BoundingBox* boundingBox in _containedBoundingBoxes )
-    {
-        if( boundingBox != nullptr )
-        {
-            boundingBox->draw();
-        }
-    }
-
-    for each( OctTreeNode* child in _children )
+	for each( GameObject* child in _containedChildren )
     {
         if( child != nullptr )
         {
-            child->draw();
+			BoundingBox* childBox = child->getBoundingBox();
+
+			childBox->draw();
+        }
+    }
+
+    for each( OctTreeNode* child in _nodes )
+    {
+        if( child != nullptr )
+        {
+			BoundingBox* childBox = child->getGameObject()->getBoundingBox();
+
+			childBox->draw();
         }
     }
 }
 
-bool OctTreeNode::collidesWith( BoundingBox* other )
+bool OctTreeNode::collidesWith( GameObject* other )
 {
     // Filter out colliders that don't hit the bounding box
-    if( !_boundingBox->collidesWith( other ) )
+    if( !_gameObject->collidesWith( other ) )
     {
         return false;
     }
@@ -120,11 +129,11 @@ bool OctTreeNode::collidesWith( BoundingBox* other )
     // Check collisions vs each collider (leaf)
     if( isLeaf() )
     {
-        for each( BoundingBox* boundingBox in _containedBoundingBoxes )
+        for each( GameObject* child in _containedChildren )
         {
-            if( boundingBox != nullptr )
+            if( child != nullptr )
             {
-                if( boundingBox->collidesWith( other ) )
+                if( child->collidesWith( other ) )
                 {
                     return true;
                 }
@@ -135,9 +144,9 @@ bool OctTreeNode::collidesWith( BoundingBox* other )
     // Check collisions with children (not a leaf)
     else
     {
-        for( unsigned i = 0; i < _children.size(); i++ )
+        for( unsigned i = 0; i < _nodes.size(); i++ )
         {
-            if( _children[i]->collidesWith( other ) )
+            if( _nodes[i]->collidesWith( other ) )
             {
                 return true;
             }
@@ -147,10 +156,46 @@ bool OctTreeNode::collidesWith( BoundingBox* other )
     return false;
 }
 
-void OctTreeNode::add( BoundingBox* other )
+void OctTreeNode::checkCollisions()
+{
+	if (isLeaf())
+	{
+		for (unsigned int i = 0; i < _containedChildren.size(); i++)
+		{
+			if (_containedChildren[i] == nullptr)
+			{
+				continue;
+			}
+
+			for (unsigned int j = i+1; j < _containedChildren.size(); j++)
+			{
+				if (_containedChildren[j] == nullptr)
+				{
+					continue;
+				}
+
+				if (_containedChildren[i]->collidesWith(_containedChildren[j]))
+				{
+					//Collision detected b/w i & j.
+					_containedChildren[i]->handleCollision(_containedChildren[j]);
+					_containedChildren[j]->handleCollision(_containedChildren[i]);
+				}
+			}
+		}
+	}
+	else
+	{
+		for (unsigned int i = 0; i < _nodes.size(); i++)
+		{
+			_nodes[i]->checkCollisions();
+		}
+	}
+}
+
+void OctTreeNode::add( GameObject* other )
 {
     // Filter out colliders that don't hit binary box
-    if( !_boundingBox->collidesWith( other ) )
+    if( !_gameObject->collidesWith( other ) )
     {
         return;
     }
@@ -164,63 +209,65 @@ void OctTreeNode::add( BoundingBox* other )
     // Add collider to this node (leaf) and increment count
     if( isLeaf() )
     {
-        _containedBoundingBoxes[_count] = other;
+		_containedChildren[_count] = other;
         _count++;
     }
 
     // Or add collider to its children (not a leaf)
     else
     {
-        for( unsigned i = 0; i < _children.size(); i++ )
+        for( unsigned i = 0; i < _nodes.size(); i++ )
         {
-            _children[i]->add( other );
+            _nodes[i]->add( other );
         }
     }
 }
 
 void OctTreeNode::branch()
 {
+	BoundingBox* nodeBox = _gameObject->getBoundingBox();
+
     // Set leaf = false
     _isLeaf = false;
 
     // Make child nodes
-    float quarterWidthX = _boundingBox->getHalfWidthX() * 0.5f;
-    float quarterWidthY = _boundingBox->getHalfWidthY() * 0.5f;
-    float quarterWidthZ = _boundingBox->getHalfWidthZ() * 0.5f;
-    glm::vec3 center = _boundingBox->getCenter();
+    float quarterWidthX = nodeBox->getHalfWidthX() * 0.5f;
+    float quarterWidthY = nodeBox->getHalfWidthY() * 0.5f;
+    float quarterWidthZ = nodeBox->getHalfWidthZ() * 0.5f;
+    glm::vec3 center = nodeBox->getCenter();
     glm::vec3 quarterWidths = glm::vec3( quarterWidthX, quarterWidthY, quarterWidthZ );
 
-    setFrontTopLeftChild( new OctTreeNode( center + glm::vec3( -quarterWidthX, quarterWidthY, quarterWidthZ ), quarterWidths ) );
-    setFrontTopRightChild( new OctTreeNode( center + glm::vec3( quarterWidthX, quarterWidthY, quarterWidthZ ), quarterWidths ) );
-    setFrontBottomLeftChild( new OctTreeNode( center + glm::vec3( -quarterWidthX, -quarterWidthY, quarterWidthZ ), quarterWidths ) );
-    setFrontBottomRightChild( new OctTreeNode( center + glm::vec3( quarterWidthX, -quarterWidthY, quarterWidthZ ), quarterWidths ) );
-    setBackTopLeftChild( new OctTreeNode( center + glm::vec3( -quarterWidthX, quarterWidthY, -quarterWidthZ ), quarterWidths ) );
-    setBackTopRightChild( new OctTreeNode( center + glm::vec3( quarterWidthX, quarterWidthY, -quarterWidthZ ), quarterWidths ) );
-    setBackBottomLeftChild( new OctTreeNode( center + glm::vec3( -quarterWidthX, -quarterWidthY, -quarterWidthZ ), quarterWidths ) );
-    setBackBottomRightChild( new OctTreeNode( center + glm::vec3( quarterWidthX, -quarterWidthY, -quarterWidthZ ), quarterWidths ) );
+    setFrontTopLeftNode( new OctTreeNode( center + glm::vec3( -quarterWidthX, quarterWidthY, quarterWidthZ ), quarterWidths ) );
+    setFrontTopRightNode( new OctTreeNode( center + glm::vec3( quarterWidthX, quarterWidthY, quarterWidthZ ), quarterWidths ) );
+    setFrontBottomLeftNode( new OctTreeNode( center + glm::vec3( -quarterWidthX, -quarterWidthY, quarterWidthZ ), quarterWidths ) );
+    setFrontBottomRightNode( new OctTreeNode( center + glm::vec3( quarterWidthX, -quarterWidthY, quarterWidthZ ), quarterWidths ) );
+    setBackTopLeftNode( new OctTreeNode( center + glm::vec3( -quarterWidthX, quarterWidthY, -quarterWidthZ ), quarterWidths ) );
+    setBackTopRightNode( new OctTreeNode( center + glm::vec3( quarterWidthX, quarterWidthY, -quarterWidthZ ), quarterWidths ) );
+    setBackBottomLeftNode( new OctTreeNode( center + glm::vec3( -quarterWidthX, -quarterWidthY, -quarterWidthZ ), quarterWidths ) );
+    setBackBottomRightNode( new OctTreeNode( center + glm::vec3( quarterWidthX, -quarterWidthY, -quarterWidthZ ), quarterWidths ) );
 
     // Add this node's colliders to the children
     // Set this node's contained children to nullptr
     for( int i = 0; i < _count; i++ )
     {
-        for( unsigned j = 0; j < _children.size(); j++ )
+        for( unsigned j = 0; j < _nodes.size(); j++ )
         {
-            _children[j]->add( _containedBoundingBoxes[i] );
+            _nodes[j]->add(_containedChildren[i] );
         }
     }
 
     for( int i = 0; i < _count; i++ )
     {
-        _containedBoundingBoxes[i] = nullptr;
+		_containedChildren[i] = nullptr;
     }
 
     // Set count = 0
     _count = 0;
 }
 
-BoundingBox* OctTreeNode::getBoundingBox()
+GameObject* OctTreeNode::getGameObject()
 {
-    return _boundingBox;
+    return _gameObject;
 }
 
 int OctTreeNode::getCount()
@@ -233,79 +280,79 @@ bool OctTreeNode::isLeaf()
     return _isLeaf;
 }
 
-std::vector<BoundingBox*> OctTreeNode::getContainedBoundingBoxes()
+std::vector<GameObject*> OctTreeNode::getContainedChildren()
 {
-    return _containedBoundingBoxes;
+    return _containedChildren;
 }
 
-OctTreeNode* OctTreeNode::getFrontTopLeftChild()
+OctTreeNode* OctTreeNode::getFrontTopLeftNode()
 {
-    return _children[0];
+    return _nodes[0];
 }
-void OctTreeNode::setFrontTopLeftChild( OctTreeNode* value )
+void OctTreeNode::setFrontTopLeftNode( OctTreeNode* value )
 {
-    _children[0] = value;
-}
-
-OctTreeNode* OctTreeNode::getFrontTopRightChild()
-{
-    return _children[1];
-}
-void OctTreeNode::setFrontTopRightChild( OctTreeNode* value )
-{
-    _children[1] = value;
+    _nodes[0] = value;
 }
 
-OctTreeNode* OctTreeNode::getFrontBottomLeftChild()
+OctTreeNode* OctTreeNode::getFrontTopRightNode()
 {
-    return _children[2];
+    return _nodes[1];
 }
-void OctTreeNode::setFrontBottomLeftChild( OctTreeNode* value )
+void OctTreeNode::setFrontTopRightNode( OctTreeNode* value )
 {
-    _children[2] = value;
-}
-
-OctTreeNode* OctTreeNode::getFrontBottomRightChild()
-{
-    return _children[3];
-}
-void OctTreeNode::setFrontBottomRightChild( OctTreeNode* value )
-{
-    _children[3] = value;
+    _nodes[1] = value;
 }
 
-OctTreeNode* OctTreeNode::getBackTopLeftChild()
+OctTreeNode* OctTreeNode::getFrontBottomLeftNode()
 {
-    return _children[4];
+    return _nodes[2];
 }
-void OctTreeNode::setBackTopLeftChild( OctTreeNode* value )
+void OctTreeNode::setFrontBottomLeftNode( OctTreeNode* value )
 {
-    _children[4] = value;
-}
-
-OctTreeNode* OctTreeNode::getBackTopRightChild()
-{
-    return _children[5];
-}
-void OctTreeNode::setBackTopRightChild( OctTreeNode* value )
-{
-    _children[5] = value;
+    _nodes[2] = value;
 }
 
-OctTreeNode* OctTreeNode::getBackBottomLeftChild()
+OctTreeNode* OctTreeNode::getFrontBottomRightNode()
 {
-    return _children[6];
+    return _nodes[3];
 }
-void OctTreeNode::setBackBottomLeftChild( OctTreeNode* value )
+void OctTreeNode::setFrontBottomRightNode( OctTreeNode* value )
 {
-    _children[6] = value;
+    _nodes[3] = value;
 }
 
-OctTreeNode* OctTreeNode::getBackBottomRightChild()
+OctTreeNode* OctTreeNode::getBackTopLeftNode()
 {
-    return _children[7];
+    return _nodes[4];
 }
-void OctTreeNode::setBackBottomRightChild( OctTreeNode* value )
+void OctTreeNode::setBackTopLeftNode( OctTreeNode* value )
 {
-    _children[7] = value;
+    _nodes[4] = value;
+}
+
+OctTreeNode* OctTreeNode::getBackTopRightNode()
+{
+    return _nodes[5];
+}
+void OctTreeNode::setBackTopRightNode( OctTreeNode* value )
+{
+    _nodes[5] = value;
+}
+
+OctTreeNode* OctTreeNode::getBackBottomLeftNode()
+{
+    return _nodes[6];
+}
+void OctTreeNode::setBackBottomLeftNode( OctTreeNode* value )
+{
+    _nodes[6] = value;
+}
+
+OctTreeNode* OctTreeNode::getBackBottomRightNode()
+{
+    return _nodes[7];
+}
+void OctTreeNode::setBackBottomRightNode( OctTreeNode* value )
+{
+    _nodes[7] = value;
 }

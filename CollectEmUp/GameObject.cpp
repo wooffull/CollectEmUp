@@ -18,7 +18,9 @@ GameObject::GameObject() :
     _fixed = false;
     _programIndex = -1;
     _model = nullptr;
+	_isSolid = false;
     _boundingBox = new BoundingBox();
+	//_boundingBox->setParentGO(this);
 }
 
 GameObject::~GameObject()
@@ -297,6 +299,15 @@ void GameObject::setFixed( bool value )
     _fixed = value;
 }
 
+bool GameObject::getSolid()
+{
+	return _isSolid;
+}
+void GameObject::setSolid(bool value)
+{
+	_isSolid = value;
+}
+
 GLuint GameObject::getProgramIndex()
 {
     return _programIndex;
@@ -336,4 +347,13 @@ BoundingBox* GameObject::getBoundingBox()
 bool GameObject::collidesWith( GameObject* other )
 {
     return _boundingBox->collidesWith( other->getBoundingBox() );
+}
+
+void GameObject::handleCollision(GameObject* other )
+{
+	if (_velocity.y < 0 && other->getSolid() && _isSolid)
+	{
+		_velocity.y = 0;
+		_position.y = other->getPosition().y + other->getBoundingBox()->getHalfWidthY() + _boundingBox->getHalfWidthY();
+	}
 }

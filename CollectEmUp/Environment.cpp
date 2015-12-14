@@ -64,6 +64,8 @@ void Environment::update( float dt )
 	GameObject::update( dt );
 
     // Check for collisions
+	_octTree->checkCollisions();
+	/*
     auto begin = _children->begin();
     auto end = _children->end();
 
@@ -80,7 +82,7 @@ void Environment::update( float dt )
                 //std::cout << "COLLISION -- " << Random::getNext() <<  std::endl;
             }
         }
-    }
+    }*/
 }
 
 void Environment::draw( float dt )
@@ -96,7 +98,7 @@ void Environment::addChild( GameObject* child )
 
     if( child != &_camera )
     {
-        _octTree->add( child->getBoundingBox() );
+        _octTree->add( child );
     }
 }
 
@@ -126,9 +128,9 @@ void Environment::moveCamera( float dx, float dy, float dz )
 
 void Environment::movePlayer( glm::vec3 delta )
 {
-    delta.x *= 3.f;
-    delta.y *= 5.f;
-    delta.z *= 3.f;
+    delta.x *= 2.f;	//Turn speed
+    delta.z *= 3.f;	//Movement speed
+	//changing delta.y has no effect. Modify jump height in KeyboardMovableGO.cpp
     _player->setInput( delta );
 	_turnAmount = -1 * delta.x;
 }
@@ -169,6 +171,10 @@ void Environment::onAdded( Event e )
 	BlockPlatform* ground = new BlockPlatform( vec3( 0, -1, 0 ), vec3( 10, 1, 10 ) );
     ground->update( 0 );
 	addChild( ground );
+
+	ground = new BlockPlatform(vec3(0, -1, 12), vec3(10, 1, 10));
+	ground->update(0);
+	addChild(ground);
 
     _player = new KeyboardMovableGO( "Models/cube.obj", "Models/Textures/cube-texture.png" );
     _player->setPosition( glm::vec3( 0, 0, 1 ) );
