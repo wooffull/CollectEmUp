@@ -1,6 +1,4 @@
 #include "Environment.h"
-#include "ExamplePrefabClass.h"
-#include "BlockPlatform.h"
 
 const glm::vec3& Environment::GRAVITY = glm::vec3( 0, -1.0f, 0 );
 const float& Environment::DRAG = -0.10f;
@@ -22,22 +20,31 @@ Environment::Environment()
 
 	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
+    _octTree = new OctTree
+    (
+        glm::vec3(),
+        glm::vec3
+        (
+            50,
+            50,
+            50
+        )
+    );
+
 	_worldMatrix = glm::one<glm::mat4>();
-	_camera.setPosition( glm::vec3( 0, 0, 1 ) );
-	addChild( &_camera );
-	turnCamera(0, 0);
-	//Initial camera rotation: 180 degrees x to center player's inital position, -10 degrees down to create a nice offset
-	turnCamera(glm::pi<float>(), -15*glm::pi<float>()/180.0f);
+
+    addChild( &_camera );
 }
 
 Environment::~Environment()
 {
+    delete _octTree;
 }
 
 void Environment::update( float dt )
 {
 	//applyGravity();
-	applyDrag();
+	//applyDrag();
 	
 	glm::mat4 viewMatrix =
 		glm::perspective( glm::pi<float>() * 0.4f, 1.0f, 0.1f, 1000.0f ) *
@@ -45,26 +52,62 @@ void Environment::update( float dt )
 
 	setShaderMatrix( _programIndex, "viewMatrix", viewMatrix );
 
+	// Setting camera to proper position/ rotation for following player
+	_camera.setPosition( _player->getPosition() - _player->forward * 4.5f + glm::vec3( 0, 2.25f, 0 ) );
+	if( _turnAmount != 0 )
+	{
+		// Player is turning, turn cam to match
+		_camera.turn( _turnAmount, 0 );
+        _turnAmount = 0;
+	}
+
 	GameObject::update( dt );
 
-	//Setting camera to proper pos/rot for following player
-	_camera.setPosition(player->getPosition() - player->forward*2.0f + glm::vec3(0, 1, 0));
-	if (turnAmount != 0)
-	{
-		//Player is turning, turn cam to match
-		_camera.turn(turnAmount, 0);
-		turnAmount = 0;
-	}
+    // Check for collisions
+    auto begin = _children->begin();
+    auto end = _children->end();
+
+    for( std::vector<GameObject*>::iterator it = begin; it != end; ++it )
+    {
+        GameObject* child1 = *it;
+
+        for( std::vector<GameObject*>::iterator it2 = it + 1; it2 != end; ++it2 )
+        {
+            GameObject* child2 = *it2;
+
+            if( child1 != &_camera && child2 != &_camera && child1->collidesWith( child2 ) )
+            {
+                //std::cout << "COLLISION -- " << Random::getNext() <<  std::endl;
+            }
+        }
+    }
 }
 
-void Environment::turnCamera(float dx, float dy)
+void Environment::draw( float dt )
 {
-	_camera.turn(dx, dy);
-	glm::vec3 camForward = _camera.getForward();
+    GameObject::draw( dt );
+
+    _octTree->draw();
 }
+
+void Environment::addChild( GameObject* child )
+{
+    GameObject::addChild( child );
+
+    if( child != &_camera )
+    {
+        _octTree->add( child->getBoundingBox() );
+    }
+}
+
+void Environment::turnCamera( float dx, float dy )
+{
+	_camera.turn( dx, dy );
+}
+
 void Environment::moveCamera( float dx, float dy, float dz )
 {
-	//Deprecated code -- do not use
+	// Deprecated code -- do not use
 	glm::vec3 forward = _camera.getForward();
 	glm::vec3 right = _camera.getRight();
 	glm::vec3 up = _camera.getUp();
@@ -83,9 +126,11 @@ void Environment::moveCamera( float dx, float dy, float dz )
 
 void Environment::movePlayer( glm::vec3 delta )
 {
-	delta *= 1.5f;
-	player->setInput(delta);
-	turnAmount = -1*delta.x;
+    delta.x *= 3.f;
+    delta.y *= 5.f;
+    delta.z *= 3.f;
+    _player->setInput( delta );
+	_turnAmount = -1 * delta.x;
 }
 
 void Environment::applyGravity()
@@ -118,11 +163,27 @@ void Environment::onAdded( Event e )
 	// and so their filenames must be prefixed with "Models/".
 	// Failure to do so will result in a memory error at runtime.
 	ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/cube-texture.png" );
-	player = new KeyboardMovableGO( "Models/cube.obj", "Models/Textures/cube-texture.png" );
+    rotatingCube->update( 0 );
 	addChild( rotatingCube );
+
 	BlockPlatform* ground = new BlockPlatform( vec3( 0, -1, 0 ), vec3( 10, 1, 10 ) );
+    ground->update( 0 );
 	addChild( ground );
-	addChild( player );
+
+    _player = new KeyboardMovableGO( "Models/cube.obj", "Models/Textures/cube-texture.png" );
+    _player->setPosition( glm::vec3( 0, 0, 1 ) );
+    _player->update( 0 );
+	addChild( _player );
+
+    // Make camera point at player!
+    glm::vec3 displacement = _player->getPosition() - _camera.getPosition();
+    float displacementLength = glm::sqrt( displacement.x * displacement.x + displacement.y * displacement.y + displacement.z * displacement.z );
+
+    // Camera's forward length = 1
+    float angle = glm::acos( glm::dot( displacement, _camera.getForward() ) / ( displacementLength * 1 ) );
+    turnCamera( angle, -15 * glm::pi<float>() / 180.0f );
+
+    _camera.update( 0 );
 }
 
 void Environment::onRemoved( Event e )

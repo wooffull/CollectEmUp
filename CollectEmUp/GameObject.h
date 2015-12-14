@@ -47,6 +47,11 @@ public:
 	virtual glm::vec3 getRotationAxis();
 	virtual void setRotationAxis( glm::vec3 value );
 
+    virtual glm::vec3 getForward();
+    virtual void setForward( glm::vec3 value );
+
+    void rotate( float angle );
+
 	virtual float getRotation();
 	virtual void setRotation( float value );
 
@@ -62,15 +67,15 @@ public:
 	virtual bool getFixed();
 	virtual void setFixed( bool value );
 
-	virtual Color getColor();
-	virtual void setColor( Color value );
-	virtual void setColor( float r, float g, float b, float a = 1.0f );
-
 	virtual GLuint getProgramIndex();
 	virtual void setProgramIndex( GLuint value );
 
 	virtual Model* getModel();
 	virtual void setModel( Model* value );
+
+    BoundingBox* getBoundingBox();
+
+    virtual bool collidesWith( GameObject* other );
 
 protected:
 	GameObject* _parent;
@@ -80,12 +85,12 @@ protected:
 	glm::vec3 _acceleration;
 	glm::vec3 _scale;
 	glm::vec3 _rotationAxis;
+    glm::vec3 _forward;
 	float _rotation;
 	float _rotationalVelocity;
 	float _rotationalAcceleration;
 	float _mass;
 	bool _fixed;
-	Color _color;
 	GLuint _programIndex;
 	Model* _model;
 	BoundingBox* _boundingBox;

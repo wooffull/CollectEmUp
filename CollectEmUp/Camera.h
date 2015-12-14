@@ -17,9 +17,6 @@ public:
     glm::vec3 getLookAt();
 
 private:
-    static const float& TURN_SENSITIVITY_X;
-    static const float& TURN_SENSITIVITY_Y;
-
     float _yaw;
     float _pitch;
 };

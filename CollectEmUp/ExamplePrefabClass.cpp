@@ -10,12 +10,11 @@ ExamplePrefabClass::ExamplePrefabClass( char* modelFilePath, char* textureFilePa
 
 	// Write prefab init code here.
 	setPosition( glm::vec3( 1.0f, 1.0f, 1.5f ) );
-	setColor( 0.5f, 0.3f, 0.5f );
 	setScale( glm::vec3( 1.0f, 1.0f, 1.0f ) );
-	setRotationAxis( glm::vec3( sqrt( 2 ), sqrt( 2 ), 0 ) );
+	setRotationAxis( glm::normalize( glm::vec3( 1, 1, 0 ) ) );
 	setRotationalVelocity( 0.0005f );
 	setFixed( false );
-
+    
 	_elapsedTime = 0;
 	_basePosition = getPosition();
 	_posDeviation = 0.1f;

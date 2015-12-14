@@ -7,7 +7,6 @@ LightSource::LightSource( float brightness, Color color ) :
 	GameObject()
 {
 	setBrightness( brightness );
-	setColor( color );
 }
 
 LightSource::~LightSource()

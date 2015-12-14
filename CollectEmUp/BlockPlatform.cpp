@@ -6,7 +6,6 @@ BlockPlatform::BlockPlatform( vec3 position, vec3 scale )
 	setModel( modelImporter.loadModel( "Models/cube.obj", "Models/Textures/cube-texture.png" ) );
 
 	setPosition( position );
-	setColor( 0.5f, 0.3f, 0.5f );
 	setScale( scale );
 	setFixed( true );
 }

@@ -31,43 +31,47 @@ GameScreen::~GameScreen()
 
 void GameScreen::update( float dt )
 {
-	GameObject::update( dt );
+    GameObject::update( dt );
 
-	float dx = 0;
-	float dy = 0;
-	float dz = 0;
-	if (_keysPressed[GLFW_KEY_W])
-	{
-		dz += dt;
-	}
-	if (_keysPressed[GLFW_KEY_A])
-	{
-		dx += dt;
-	}
-	if (_keysPressed[GLFW_KEY_S])
-	{
-		dz -= dt;
-	}
-	if (_keysPressed[GLFW_KEY_D])
-	{
-		dx -= dt;
-	}
-	if (_keysPressed[GLFW_KEY_SPACE])
-	{
-		dy += dt;
-	}
+    float dx = 0;
+    float dy = 0;
+    float dz = 0;
+    if( _keysPressed[GLFW_KEY_W] )
+    {
+        dz += dt;
+    }
+    if( _keysPressed[GLFW_KEY_A] )
+    {
+        dx += dt;
+    }
+    if( _keysPressed[GLFW_KEY_S] )
+    {
+        dz -= dt;
+    }
+    if( _keysPressed[GLFW_KEY_D] )
+    {
+        dx -= dt;
+    }
+    if( _keysPressed[GLFW_KEY_SPACE] )
+    {
+        dy += dt;
+    }
 
-	if (dx != 0 || dy != 0 || dz != 0)
-	{
-		_environment->movePlayer(glm::vec3(dx, dy, dz));
-	}
+    if( dx != 0 || dy != 0 || dz != 0 )
+    {
+        _environment->movePlayer( glm::vec3( dx, dy, dz ) );
+    }
 }
 
 void GameScreen::onMouseMove( MouseEvent e )
 {
 	updateMouse( e );
 
-	//_environment->turnCamera( e.getDx(), e.getDy() );
+    float sensitivity = 0.025f;
+    float dx = e.getDx() * sensitivity;
+    float dy = e.getDy() * sensitivity;
+
+	//_environment->turnCamera( dx, dy );
 }
 void GameScreen::onMouseDown( MouseEvent e )
 {

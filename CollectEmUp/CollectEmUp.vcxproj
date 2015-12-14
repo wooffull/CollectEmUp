@@ -38,6 +38,8 @@
     <ClCompile Include="ModelImportData.cpp" />
     <ClCompile Include="ModelImporter.cpp" />
     <ClCompile Include="MouseEvent.cpp" />
+    <ClCompile Include="OctTree.cpp" />
+    <ClCompile Include="OctTreeNode.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="ShaderHelper.cpp" />
     <ClCompile Include="ShaderImporter.cpp" />
@@ -72,6 +74,8 @@
     <ClInclude Include="ModelImportData.h" />
     <ClInclude Include="ModelImporter.h" />
     <ClInclude Include="MouseEvent.h" />
+    <ClInclude Include="OctTree.h" />
+    <ClInclude Include="OctTreeNode.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="ShaderHelper.h" />
     <ClInclude Include="ShaderImporter.h" />

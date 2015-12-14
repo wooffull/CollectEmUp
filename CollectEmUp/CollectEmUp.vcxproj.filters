@@ -87,7 +87,13 @@
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
     <ClCompile Include="BoundingBox.cpp">
-      <Filter>Source Files\Display\Util</Filter>
+      <Filter>Source Files\Spacial</Filter>
+    </ClCompile>
+    <ClCompile Include="OctTree.cpp">
+      <Filter>Source Files\Spacial</Filter>
+    </ClCompile>
+    <ClCompile Include="OctTreeNode.cpp">
+      <Filter>Source Files\Spacial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,7 +191,13 @@
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="BoundingBox.h">
-      <Filter>Header Files\Display\Util</Filter>
+      <Filter>Header Files\Spacial</Filter>
+    </ClInclude>
+    <ClInclude Include="OctTree.h">
+      <Filter>Header Files\Spacial</Filter>
+    </ClInclude>
+    <ClInclude Include="OctTreeNode.h">
+      <Filter>Header Files\Spacial</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -243,11 +255,11 @@
     <Filter Include="Source Files\Util\Importers">
       <UniqueIdentifier>{3127058d-0042-46d6-864d-28b9171d6d6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Display\Util">
-      <UniqueIdentifier>{f3138f3e-959b-444a-aa17-232090a02762}</UniqueIdentifier>
+    <Filter Include="Header Files\Spacial">
+      <UniqueIdentifier>{f69b4649-ca1a-4f13-9a2d-988e0a067778}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Display\Util">
-      <UniqueIdentifier>{c44095ef-9e78-4f47-a5e1-8de27f16876b}</UniqueIdentifier>
+    <Filter Include="Source Files\Spacial">
+      <UniqueIdentifier>{c0dbd413-08b6-4552-8534-18b32da4da92}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

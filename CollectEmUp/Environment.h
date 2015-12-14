@@ -6,37 +6,45 @@
 #include "DisplayEvent.h"
 #include "Camera.h"
 #include "KeyboardMovableGO.h"
+#include "OctTree.h"
+#include "ExamplePrefabClass.h"
+#include "BlockPlatform.h"
 
 class Environment :
-	public GameObject
+    public GameObject
 {
 public:
-	Environment();
-	virtual ~Environment();
-	
-	virtual void update( float dt );
+    Environment();
+    virtual ~Environment();
 
-	void turnCamera( float dx, float dy );
-	void moveCamera( float dx, float dy, float dz );
+    virtual void update( float dt );
+    virtual void draw( float dt );
 
-	void movePlayer(glm::vec3 delta);
+    virtual void addChild( GameObject* child );
 
-	void applyGravity();
-	void applyDrag();
-	
-	void onRemoved( Event e );
-	void onAdded( Event e );
+    void turnCamera( float dx, float dy );
+    void moveCamera( float dx, float dy, float dz );
+
+    void movePlayer( glm::vec3 delta );
+
+    void applyGravity();
+    void applyDrag();
+
+    void onRemoved( Event e );
+    void onAdded( Event e );
 
 private:
-	static const glm::vec3& GRAVITY;
-	static const float& DRAG;
-	static const float& FRICTION;
-	static const float& DEFLECT_PERCENTAGE;
+    static const glm::vec3& GRAVITY;
+    static const float& DRAG;
+    static const float& FRICTION;
+    static const float& DEFLECT_PERCENTAGE;
 
-	float turnAmount;
+    glm::mat4 _worldMatrix;
+    Camera _camera;
+    OctTree* _octTree;
+    KeyboardMovableGO* _player;
 
-	glm::mat4 _worldMatrix;
-	Camera _camera;
-	KeyboardMovableGO* player;
+    // Should be handled by something like a FollowingCamera
+    float _turnAmount;
 };
 

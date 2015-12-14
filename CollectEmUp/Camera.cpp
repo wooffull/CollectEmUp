@@ -1,9 +1,5 @@
 #include "Camera.h"
 
-//In the future, handle sensitivity in the input methods. Having dx and dy in turn be an accurate reflection of the degrees that will be turned is important.
-const float& Camera::TURN_SENSITIVITY_Y = 1.0f;//0.025f;
-const float& Camera::TURN_SENSITIVITY_X = 1.0f;// 0.025f;
-
 Camera::Camera() :
     GameObject()
 {
@@ -20,8 +16,8 @@ void Camera::turn( float dx, float dy )
 {
     float pi = glm::pi<float>();
 
-    _yaw += dx * TURN_SENSITIVITY_X;
-    _pitch += dy * TURN_SENSITIVITY_Y;
+    _yaw += dx;
+    _pitch += dy;
 
     // Clamp the pitch value to be from -PI/2 to PI/2
     _pitch = glm::clamp<float>( _pitch, -pi * 0.5f, pi * 0.5f );
