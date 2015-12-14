@@ -9,7 +9,8 @@ KeyboardMovableGO::KeyboardMovableGO( char* modelFilePath, char* textureFilePath
     setScale( glm::vec3( 1.0f, 1.0f, 1.0f ) );
     setRotationAxis( glm::vec3( 0, 1, 0 ) );
     setFixed( false );
-    setAcceleration( glm::vec3( 0, -5, 0 ) );
+    setAcceleration( glm::vec3( 0, -60, 0 ) );
+	setSolid( true );
 }
 
 KeyboardMovableGO::~KeyboardMovableGO()
@@ -20,31 +21,40 @@ void KeyboardMovableGO::update( float dt )
 {
     if( _inputData.x != 0 )
     {
+		//Turn
         float deltaRot = _inputData.x;
         setRotation( _rotation + deltaRot );
         forward = glm::vec3( sin( _rotation ), 0, cos( _rotation ) );
     }
-    if( _onGround && _inputData.y != 0 )
+    if( _velocity.y == 0 && _inputData.y != 0 )
     {
-        _onGround = false;
+		//Jump
+//        _onGround = false;
         _velocity.y = 20;
-        _acceleration.y = -60;
+//        _acceleration.y = -60;
     }
 
+	//Move
     glm::vec3 deltaPos = forward * _inputData.z;
     setPosition( _position + deltaPos * _movementSpeed );
-    //I don't know if I need to call the parent method, but I might as well. The GO is fixed, so we shouldn't see any unwanted movement.
     GameObject::update( dt );
 
+	//Reset input data & check for ground
     _inputData = glm::vec3( 0, 0, 0 );
-
-    if( !_onGround && _position.y <= 0 )
+	
+    /*if( !_onGround && _position.y <= 0 )
     {
         _position.y = 0;
         _velocity.y = 0;
         _acceleration.y = 0;
         _onGround = true;
-    }
+    }*/
+
+	if (_position.y <= -20)
+	{
+		_position = glm::vec3(0, 0, 0);
+		_velocity = glm::vec3(0, 0, 0);
+	}
 }
 
 void KeyboardMovableGO::draw( float dt )

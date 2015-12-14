@@ -8,6 +8,7 @@ BlockPlatform::BlockPlatform( vec3 position, vec3 scale )
 	setPosition( position );
 	setScale( scale );
 	setFixed( true );
+	setSolid( true );
 }
 
 BlockPlatform::~BlockPlatform()

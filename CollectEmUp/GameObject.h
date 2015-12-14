@@ -50,6 +50,9 @@ public:
     virtual glm::vec3 getForward();
     virtual void setForward( glm::vec3 value );
 
+	virtual bool getSolid();
+	virtual void setSolid(bool value);
+
     void rotate( float angle );
 
 	virtual float getRotation();
@@ -73,9 +76,11 @@ public:
 	virtual Model* getModel();
 	virtual void setModel( Model* value );
 
-    BoundingBox* getBoundingBox();
+    virtual BoundingBox* getBoundingBox();
 
     virtual bool collidesWith( GameObject* other );
+
+	virtual void handleCollision( GameObject* other );
 
 protected:
 	GameObject* _parent;
@@ -91,6 +96,7 @@ protected:
 	float _rotationalAcceleration;
 	float _mass;
 	bool _fixed;
+	bool _isSolid;
 	GLuint _programIndex;
 	Model* _model;
 	BoundingBox* _boundingBox;

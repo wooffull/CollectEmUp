@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include "GameObject.h"
 #include "BoundingBox.h"
 
 class OctTreeNode
@@ -15,45 +16,47 @@ public:
 
     void print();
     void draw();
-    bool collidesWith( BoundingBox* other );
-    void add( BoundingBox* other );
+    bool collidesWith( GameObject* other );
+    void add( GameObject* other );
     void branch();
 
-    BoundingBox* getBoundingBox();
+	GameObject* getGameObject();
     int getCount();
     bool isLeaf();
 
-    std::vector<BoundingBox*> getContainedBoundingBoxes();
+    std::vector<GameObject*> getContainedChildren();
 
-    OctTreeNode* getFrontTopLeftChild();
-    void setFrontTopLeftChild( OctTreeNode* value );
+    OctTreeNode* getFrontTopLeftNode();
+    void setFrontTopLeftNode( OctTreeNode* value );
 
-    OctTreeNode* getFrontTopRightChild();
-    void setFrontTopRightChild( OctTreeNode* value );
+    OctTreeNode* getFrontTopRightNode();
+    void setFrontTopRightNode( OctTreeNode* value );
 
-    OctTreeNode* getFrontBottomLeftChild();
-    void setFrontBottomLeftChild( OctTreeNode* value );
+    OctTreeNode* getFrontBottomLeftNode();
+    void setFrontBottomLeftNode( OctTreeNode* value );
 
-    OctTreeNode* getFrontBottomRightChild();
-    void setFrontBottomRightChild( OctTreeNode* value );
+    OctTreeNode* getFrontBottomRightNode();
+    void setFrontBottomRightNode( OctTreeNode* value );
 
-    OctTreeNode* getBackTopLeftChild();
-    void setBackTopLeftChild( OctTreeNode* value );
+    OctTreeNode* getBackTopLeftNode();
+    void setBackTopLeftNode( OctTreeNode* value );
 
-    OctTreeNode* getBackTopRightChild();
-    void setBackTopRightChild( OctTreeNode* value );
+    OctTreeNode* getBackTopRightNode();
+    void setBackTopRightNode( OctTreeNode* value );
 
-    OctTreeNode* getBackBottomLeftChild();
-    void setBackBottomLeftChild( OctTreeNode* value );
+    OctTreeNode* getBackBottomLeftNode();
+    void setBackBottomLeftNode( OctTreeNode* value );
 
-    OctTreeNode* getBackBottomRightChild();
-    void setBackBottomRightChild( OctTreeNode* value );
+    OctTreeNode* getBackBottomRightNode();
+    void setBackBottomRightNode( OctTreeNode* value );
+
+	void checkCollisions();
 
 private:
-    BoundingBox* _boundingBox;
+	GameObject* _gameObject;
     int _count; // How many colliders?
-    std::vector<BoundingBox*> _containedBoundingBoxes;
+    std::vector<GameObject*> _containedChildren;
     bool _isLeaf;
-    std::vector<OctTreeNode*> _children;
+    std::vector<OctTreeNode*> _nodes;
 };
 

@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "OctTreeNode.h"
-#include "BoundingBox.h"
+#include "GameObject.h"
 
 class OctTree
 {
@@ -12,8 +12,9 @@ public:
 
     void print();
     void draw();
-    bool collidesWith( BoundingBox* otherColliderPtr );
-    void add( BoundingBox* otherColliderPtr );
+    bool collidesWith( GameObject* otherColliderPtr );
+	void checkCollisions();
+    void add( GameObject* otherColliderPtr );
 
     OctTreeNode* getRoot();
 
