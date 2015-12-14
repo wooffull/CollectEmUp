@@ -167,7 +167,6 @@ void Environment::onAdded( Event e )
 	// and so their filenames must be prefixed with "Models/".
 	// Failure to do so will result in a memory error at runtime.
 
-
 	//ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/cube-texture.png" );
  //   rotatingCube->update( 0 );
 	//addChild( rotatingCube );

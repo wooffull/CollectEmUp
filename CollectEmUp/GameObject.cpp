@@ -351,9 +351,16 @@ bool GameObject::collidesWith( GameObject* other )
 
 void GameObject::handleCollision(GameObject* other )
 {
-	if (_velocity.y < 0 && other->getSolid() && _isSolid)
+	if (other->getSolid())
 	{
-		_velocity.y = 0;
-		_position.y = other->getPosition().y + other->getBoundingBox()->getHalfWidthY() + _boundingBox->getHalfWidthY();
+		if (_velocity.y < 0 && _isSolid && _position.y >= other->getPosition().y+other->getBoundingBox()->getHalfWidthY())
+		{
+			_velocity.y = 0;
+			_position.y = other->getPosition().y + other->getBoundingBox()->getHalfWidthY() + _boundingBox->getHalfWidthY();
+		}
+	}
+	else
+	{
+		//Add a condition or two and collectable code might go here.
 	}
 }
