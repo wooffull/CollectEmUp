@@ -5,6 +5,7 @@
 #include <iomanip>
 #include "GameObject.h"
 #include "BoundingBox.h"
+#include "HandleCollision.h"
 
 class OctTreeNode
 {

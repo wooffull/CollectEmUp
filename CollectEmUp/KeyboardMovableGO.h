@@ -16,9 +16,13 @@ public:
 
 	void setInput( glm::vec3 );
 
+	int getCollectablesCount();
+	void setCollectablesCount(int collectablesCount);
+
 private:
     glm::vec3 _inputData;
     float _movementSpeed = 2;
     bool _onGround;
+	int _collectablesCount = 0;
 };
 

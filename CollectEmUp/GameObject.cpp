@@ -19,6 +19,7 @@ GameObject::GameObject() :
     _programIndex = -1;
     _model = nullptr;
 	_isSolid = false;
+	_isVisible = true;
     _boundingBox = new BoundingBox();
 	//_boundingBox->setParentGO(this);
 }
@@ -78,15 +79,18 @@ void GameObject::update( float dt )
 
 void GameObject::draw( float dt )
 {
-    drawShape();
+	if (_isVisible)
+	{
+		drawShape();
 
-    // Draw all nested children
-    auto begin = _children->begin();
-    auto end = _children->end();
-    for( std::vector<GameObject*>::iterator it = begin; it != end; ++it )
-    {
-        ( *it )->draw( dt );
-    }
+		// Draw all nested children
+		auto begin = _children->begin();
+		auto end = _children->end();
+		for (std::vector<GameObject*>::iterator it = begin; it != end; ++it)
+		{
+			(*it)->draw(dt);
+		}
+	}
 }
 
 void GameObject::drawShape()
@@ -349,18 +353,43 @@ bool GameObject::collidesWith( GameObject* other )
     return _boundingBox->collidesWith( other->getBoundingBox() );
 }
 
-void GameObject::handleCollision(GameObject* other )
+//void GameObject::handleCollision(GameObject* other )
+//{
+//	if (other->getSolid())
+//	{
+//		if (_velocity.y < 0 && _isSolid && _position.y >= other->getPosition().y+other->getBoundingBox()->getHalfWidthY())
+//		{
+//			_velocity.y = 0;
+//			_position.y = other->getPosition().y + other->getBoundingBox()->getHalfWidthY() + _boundingBox->getHalfWidthY();
+//		}
+//	}
+//	else if (other->getGameObjType() == "Collectable" && other->getIsVisible() == true)
+//	{
+//		other->setIsVisible(false);
+//		other->setCollectablesCount(other->getCollectablesCount() += 1);
+//	}
+//	else
+//	{
+//		//Add a condition or two and collectable code might go here.
+//	}
+//}
+
+std::string GameObject::getGameObjType()
 {
-	if (other->getSolid())
-	{
-		if (_velocity.y < 0 && _isSolid && _position.y >= other->getPosition().y+other->getBoundingBox()->getHalfWidthY())
-		{
-			_velocity.y = 0;
-			_position.y = other->getPosition().y + other->getBoundingBox()->getHalfWidthY() + _boundingBox->getHalfWidthY();
-		}
-	}
-	else
-	{
-		//Add a condition or two and collectable code might go here.
-	}
+	return _gameObjType;
+}
+
+void GameObject::setGameObjType(std::string gameObjType)
+{
+	_gameObjType = gameObjType;
+}
+
+bool GameObject::getIsVisible()
+{
+	return _isVisible;
+}
+
+void GameObject::setIsVisible(bool isVisible)
+{
+	_isVisible = isVisible;
 }

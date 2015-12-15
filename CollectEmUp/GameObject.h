@@ -80,7 +80,13 @@ public:
 
     virtual bool collidesWith( GameObject* other );
 
-	virtual void handleCollision( GameObject* other );
+	//virtual void handleCollision( GameObject* other );
+
+	virtual std::string getGameObjType();
+	virtual void setGameObjType(std::string gameObjType);
+
+	virtual bool getIsVisible();
+	virtual void setIsVisible(bool isVisible);
 
 protected:
 	GameObject* _parent;
@@ -97,9 +103,12 @@ protected:
 	float _mass;
 	bool _fixed;
 	bool _isSolid;
+	bool _isVisible;
 	GLuint _programIndex;
 	Model* _model;
 	BoundingBox* _boundingBox;
+	std::string _gameObjType;
+
 
 	GLint _offsetIndex;
 	GLint _scaleIndex;

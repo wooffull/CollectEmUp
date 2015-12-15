@@ -175,8 +175,8 @@ void OctTreeNode::checkCollisions()
 				if (_containedChildren[i]->collidesWith(_containedChildren[j]))
 				{
 					//Collision detected b/w i & j.
-					_containedChildren[i]->handleCollision(_containedChildren[j]);
-					_containedChildren[j]->handleCollision(_containedChildren[i]);
+					handleCollision(_containedChildren[i], _containedChildren[j]);
+					handleCollision(_containedChildren[j], _containedChildren[i]);
 				}
 			}
 		}
@@ -203,8 +203,8 @@ void OctTreeNode::checkCollisions(GameObject* other)
 
 			if (_containedChildren[i]->collidesWith(other))
 			{
-				_containedChildren[i]->handleCollision(other);
-				other->handleCollision(_containedChildren[i]);
+				handleCollision(_containedChildren[i], other);
+				handleCollision(other, _containedChildren[i]);
 			}
 		}
 	}

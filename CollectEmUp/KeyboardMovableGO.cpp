@@ -66,3 +66,13 @@ void KeyboardMovableGO::setInput( glm::vec3 in )
 {
 	_inputData = in;
 }
+
+int KeyboardMovableGO::getCollectablesCount()
+{
+	return _collectablesCount;
+}
+
+void KeyboardMovableGO::setCollectablesCount(int collectablesCount)
+{
+	_collectablesCount = collectablesCount;
+}

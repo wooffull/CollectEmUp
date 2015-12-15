@@ -8,6 +8,8 @@ Collectable::Collectable(vec3 position, vec3 scale)
 	setPosition(position);
 	setScale(scale);
 	setFixed(true);
+
+	setGameObjType("Collectable");
 }
 
 Collectable::~Collectable()

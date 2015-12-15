@@ -30,6 +30,7 @@
     <ClCompile Include="GameException.h" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="HandleCollision.cpp" />
     <ClCompile Include="ImportData.cpp" />
     <ClCompile Include="KeyboardEvent.cpp" />
     <ClCompile Include="KeyboardMovableGO.cpp" />
@@ -66,6 +67,7 @@
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="HandleCollision.h" />
     <ClInclude Include="IEventDispatcher.h" />
     <ClInclude Include="IImporter.h" />
     <ClInclude Include="ImportData.h" />
