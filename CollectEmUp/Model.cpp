@@ -10,7 +10,7 @@ Model::Model( std::vector<GLfloat> vertexBufferData, std::vector<GLushort> faceB
 		textureFilePath, SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID, SOIL_FLAG_INVERT_Y
 	);
-	glBindTexture( GL_TEXTURE_2D, _textureID );
+	//glBindTexture( GL_TEXTURE_2D, _textureID );
 
 	glGenVertexArrays( 1, &_vaoIndex );
 
@@ -50,6 +50,8 @@ Model::~Model()
 // Draw the shape to the screen
 void Model::draw()
 {
+	glBindTexture(GL_TEXTURE_2D, _textureID);
+
 	// Bind VAO
 	glBindVertexArray( _vaoIndex );
 
