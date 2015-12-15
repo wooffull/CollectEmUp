@@ -9,17 +9,10 @@ ExamplePrefabClass::ExamplePrefabClass( char* modelFilePath, char* textureFilePa
 	setModel( modelImporter.loadModel( modelFilePath, textureFilePath ) );
 
 	// Write prefab init code here.
-	setPosition( glm::vec3( 1.0f, 1.0f, 1.5f ) );
-	setScale( glm::vec3( 1.0f, 1.0f, 1.0f ) );
-	setRotationAxis( glm::normalize( glm::vec3( 1, 1, 0 ) ) );
-	setRotationalVelocity( 0.0005f );
-	setFixed( false );
-    
-	_elapsedTime = 0;
-	_basePosition = getPosition();
-	_posDeviation = 0.1f;
-	// Rate measured in radians per second
-	_bobRate = glm::pi<float>() / 3.0f;
+	setScale( glm::vec3( 5.f, 3.f, 0.1f ) );
+	setRotationAxis( glm::vec3( 0, 1, 0 ) );
+	setFixed( true );
+	setIsVisible( false );
 }
 
 ExamplePrefabClass::~ExamplePrefabClass()
@@ -29,18 +22,9 @@ ExamplePrefabClass::~ExamplePrefabClass()
 
 void ExamplePrefabClass::update( float dt )
 {
-	// Write prefab update code here.
-	// Useful functions can be found in GameObject.h.
-
-	// This example object should float in one spot. Acceleration is being canceled out to prevent gravity,
-	// while its position is modified with a sine wave to produce a nice bobbing motion.
-	// Rotational velocity is set in the constructor and not modified after, so it continues to rotate at a steady pace.
-	setAcceleration( vec3( 0, 0, 0 ) );
-	_elapsedTime += dt;
-	setPosition( vec3( _basePosition.x, _basePosition.y + _posDeviation * sin( _bobRate * _elapsedTime ), _basePosition.z ) );
-	
-	// Include this function call at the end of each update.
-	GameObject::update( dt );
+	vec3 parentPos = _parent->getPosition();
+	setPosition( vec3( parentPos.x, _parent->getPosition().y + 2.75f, parentPos.z ) );
+//	setRotation( _parent->getRotation() );
 }
 
 void ExamplePrefabClass::draw( float dt )

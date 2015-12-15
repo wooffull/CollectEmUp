@@ -182,9 +182,13 @@ void Environment::onAdded( Event e )
 		addChild(level1Objects[i]);
 	}
 
+	ExamplePrefabClass* test = new ExamplePrefabClass("Models/cube.obj", "Models/Textures/winner-texture.png");
+
 	_player = new KeyboardMovableGO( "Models/Player1.obj", "Models/Textures/cube-texture.png" );
     _player->setPosition( glm::vec3( 0, 2, 1 ) );
     _player->update( 0 );
+	_player->addChild(test);
+	test->update(0);
 	addChild( _player );
 
 	_camera.setPosition(_player->getPosition() - glm::vec3(0, 0, 1));

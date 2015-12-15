@@ -75,4 +75,14 @@ int KeyboardMovableGO::getCollectablesCount()
 void KeyboardMovableGO::setCollectablesCount(int collectablesCount)
 {
 	_collectablesCount = collectablesCount;
+	if (_collectablesCount >= 3)
+	{
+		auto begin = _children->begin();
+		auto end = _children->end();
+		for (std::vector<GameObject*>::iterator it = begin; it != end; ++it)
+		{
+			GameObject* curChild = *it;
+			curChild->setIsVisible( true );
+		}
+	}
 }
