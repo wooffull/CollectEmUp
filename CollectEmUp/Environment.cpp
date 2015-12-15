@@ -182,7 +182,7 @@ void Environment::onAdded( Event e )
 		addChild(level1Objects[i]);
 	}
 
-	_player = new KeyboardMovableGO( "Models/cube.obj", "Models/Textures/cube-texture.png" );
+	_player = new KeyboardMovableGO( "Models/Player1.obj", "Models/Textures/cube-texture.png" );
     _player->setPosition( glm::vec3( 0, 2, 1 ) );
     _player->update( 0 );
 	addChild( _player );
