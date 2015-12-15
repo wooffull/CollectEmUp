@@ -5,4 +5,4 @@
 #include "BlockPlatform.h"
 #include "KeyboardMovableGO.h"
 
-void handleCollision(GameObject* first, GameObject* other);
+void handleCollision( GameObject* first, GameObject* other );

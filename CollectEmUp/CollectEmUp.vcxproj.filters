@@ -102,7 +102,7 @@
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
     <ClCompile Include="HandleCollision.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -215,7 +215,7 @@
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
     <ClInclude Include="HandleCollision.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

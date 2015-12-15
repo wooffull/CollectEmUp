@@ -66,24 +66,6 @@ void Environment::update( float dt )
 
     // Check for collisions
 	_octTree->checkCollisions( _player );
-	/*
-    auto begin = _children->begin();
-    auto end = _children->end();
-
-    for( std::vector<GameObject*>::iterator it = begin; it != end; ++it )
-    {
-        GameObject* child1 = *it;
-
-        for( std::vector<GameObject*>::iterator it2 = it + 1; it2 != end; ++it2 )
-        {
-            GameObject* child2 = *it2;
-
-            if( child1 != &_camera && child2 != &_camera && child1->collidesWith( child2 ) )
-            {
-                //std::cout << "COLLISION -- " << Random::getNext() <<  std::endl;
-            }
-        }
-    }*/
 }
 
 void Environment::draw( float dt )
@@ -129,8 +111,8 @@ void Environment::moveCamera( float dx, float dy, float dz )
 
 void Environment::movePlayer( glm::vec3 delta )
 {
-    delta.x *= 2.f;	//Turn speed
-    delta.z *= 3.f;	//Movement speed
+    delta.x *= 2.f;	// Turn speed
+    delta.z *= 3.f;	// Movement speed
 	//changing delta.y has no effect. Modify jump height in KeyboardMovableGO.cpp
     _player->setInput( delta );
 	_turnAmount = -1 * delta.x;
@@ -161,37 +143,25 @@ void Environment::applyDrag()
 
 void Environment::onAdded( Event e )
 {
-	// Add level objects here.
-	// IMPORTANT: Model files are stored in the Models subfolder,
-	// and so their filenames must be prefixed with "Models/".
-	// Failure to do so will result in a memory error at runtime.
+    // Add level objects here.
+    _lvl1 = new Level1();
+    std::vector<GameObject*> level1Objects = _lvl1->getLevelObjects();
+    for( size_t i = 0; i < level1Objects.size(); ++i )
+    {
+        level1Objects[i]->update( 0 );
+        addChild( level1Objects[i] );
+    }
 
-	//ExamplePrefabClass* rotatingCube = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/cube-texture.png" );
- //   rotatingCube->update( 0 );
-	//addChild( rotatingCube );
+    ExamplePrefabClass* test = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/winner-texture.png" );
 
-	//BlockPlatform* ground = new BlockPlatform( vec3( 0, -1, 0 ), vec3( 10, 1, 10 ) );
- //   ground->update( 0 );
-	//addChild( ground );
-
-	_lvl1 = new Level1();
-	std::vector<GameObject*> level1Objects = _lvl1->getLevelObjects();
-	for (size_t i = 0; i < level1Objects.size(); ++i)
-	{
-		level1Objects[i]->update( 0 );
-		addChild(level1Objects[i]);
-	}
-
-	ExamplePrefabClass* test = new ExamplePrefabClass("Models/cube.obj", "Models/Textures/winner-texture.png");
-
-	_player = new KeyboardMovableGO( "Models/Player1.obj", "Models/Textures/cube-texture.png" );
+    _player = new KeyboardMovableGO( "Models/Player1.obj", "Models/Textures/cube-texture.png" );
     _player->setPosition( glm::vec3( 0, 2, 1 ) );
     _player->update( 0 );
-	_player->addChild(test);
-	test->update(0);
-	addChild( _player );
+    _player->addChild( test );
+    test->update( 0 );
+    addChild( _player );
 
-	_camera.setPosition(_player->getPosition() - glm::vec3(0, 0, 1));
+    _camera.setPosition( _player->getPosition() - glm::vec3( 0, 0, 1 ) );
 
     // Make camera point at player!
     glm::vec3 displacement = _player->getPosition() - _camera.getPosition();
