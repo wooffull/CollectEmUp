@@ -3,7 +3,7 @@
 Collectable::Collectable( vec3 position, vec3 scale )
 {
     ModelImporter modelImporter;
-    setModel( modelImporter.loadModel( "Models/bolt.obj", "Models/Textures/nut-texture.png" ) );
+    setModel( modelImporter.loadModel( "Models/bolt.obj", "Models/Textures/nut_texture2.jpg" ) );
 
     setPosition( position );
     setScale( scale );

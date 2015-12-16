@@ -153,8 +153,8 @@ void Environment::onAdded( Event e )
     }
 
     ExamplePrefabClass* test = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/winner-texture.png" );
-
-    _player = new KeyboardMovableGO( "Models/Player1.obj", "Models/Textures/cube-texture.png" );
+	
+	_player = new KeyboardMovableGO( "Models/Player1.obj", "Models/Textures/player_texture2.jpg" );
     _player->setPosition( glm::vec3( 0, 2, 1 ) );
     _player->update( 0 );
     _player->addChild( test );

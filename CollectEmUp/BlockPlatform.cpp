@@ -4,7 +4,7 @@ BlockPlatform::BlockPlatform( vec3 position, vec3 scale ) :
 	GameObject()
 {
 	ModelImporter modelImporter;
-	setModel( modelImporter.loadModel( "Models/cube.obj", "Models/Textures/platform_texture.png" ) );
+	setModel( modelImporter.loadModel( "Models/cube.obj", "Models/Textures/platform_texture2.png" ) );
 
 	setPosition( position );
 	setScale( scale );
