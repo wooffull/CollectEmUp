@@ -8,6 +8,14 @@ void setShaderColor( GLuint programIndex, const char* uniformVariableName, float
 	glProgramUniform4f( programIndex, uniformLocation, r, g, b, 1.0f );
 }
 
+void setShaderFloat( GLuint programIndex, const char* uniformVariableName, const float& value )
+{
+    // Get location of specified variable in the specified shader program
+    GLint uniformLocation = glGetUniformLocation( programIndex, uniformVariableName );
+
+    glProgramUniform1f( programIndex, uniformLocation, value );
+}
+
 void setShaderVec2( GLuint programIndex, const char* uniformVariableName, const vec2& vecToSend )
 {
 	// Get location of specified variable in the specified shader program

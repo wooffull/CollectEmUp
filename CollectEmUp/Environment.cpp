@@ -33,6 +33,14 @@ Environment::Environment()
 
 	_worldMatrix = glm::one<glm::mat4>();
 
+    _timeElapsed = 0;
+
+    _skyBox = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/skybox.png" );
+    _skyBox->setScale( glm::vec3( 100, 100, 100 ) );
+    _skyBox->setPosition( glm::vec3( 0, 0, 0 ) );
+    _skyBox->setBrightness( 1.0f );
+    addChild( _skyBox );
+
     addChild( &_camera );
 }
 
@@ -40,6 +48,8 @@ Environment::~Environment()
 {
     delete _octTree;
 	delete _lvl1;
+    delete _skyBox;
+    delete _winPanel;
 }
 
 void Environment::update( float dt )
@@ -62,10 +72,25 @@ void Environment::update( float dt )
         _turnAmount = 0;
 	}
 
+    glm::vec3 playerPos = _player->getPosition();
+    _skyBox->setPosition( _camera.getPosition() );
+    _winPanel->setPosition( glm::vec3( playerPos.x, playerPos.y + 3.0f, playerPos.z ) );
+
 	GameObject::update( dt );
 
     // Check for collisions
 	_octTree->checkCollisions( _player );
+
+    glm::vec3 obstaclePos = _obstacle->getPosition();
+    obstaclePos.x = -5 + 3 * glm::sin( _timeElapsed * 2 );
+    _obstacle->setPosition( obstaclePos );
+
+    if( _player->collidesWith( _obstacle ) )
+    {
+        _player->setPosition( glm::vec3( 0, 2, 0 ) );
+    }
+
+    _timeElapsed += dt;
 }
 
 void Environment::draw( float dt )
@@ -152,16 +177,27 @@ void Environment::onAdded( Event e )
         addChild( level1Objects[i] );
     }
 
-    ExamplePrefabClass* test = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/winner-texture.png" );
+    _winPanel = new ExamplePrefabClass( "Models/cube.obj", "Models/Textures/winner-texture.png" );
+    _winPanel->setIsVisible( false );
+    _winPanel->setBrightness( 1.0f );
+    _winPanel->setRotationAxis( glm::vec3( 0, 1, 0 ) );
+    _winPanel->setRotationalVelocity( 0.005f );
+    _winPanel->setScale( glm::vec3( 4.f, 2.5f, 0.001f ) );
+    _winPanel->setRotationAxis( glm::vec3( 0, 1, 0 ) );
+    _winPanel->update( 0 );
 	
 	_player = new KeyboardMovableGO( "Models/Player1.obj", "Models/Textures/player_texture2.jpg" );
-    _player->setPosition( glm::vec3( 0, 2, 1 ) );
+    _player->setPosition( glm::vec3( 0, -39.9f, 0 ) );
     _player->update( 0 );
-    _player->addChild( test );
-    test->update( 0 );
+    _player->addChild( _winPanel );
     addChild( _player );
 
     _camera.setPosition( _player->getPosition() - glm::vec3( 0, 0, 1 ) );
+
+    _obstacle = new ExamplePrefabClass( "Models/obstacle.obj", "Models/Textures/obstacle_texture.png" );
+    _obstacle->setPosition( glm::vec3( -5, 8.5f, 15.5f ) );
+    _obstacle->update( 0 );
+    addChild( _obstacle );
 
     // Make camera point at player!
     glm::vec3 displacement = _player->getPosition() - _camera.getPosition();

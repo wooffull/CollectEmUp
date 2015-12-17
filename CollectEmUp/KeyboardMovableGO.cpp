@@ -42,7 +42,7 @@ void KeyboardMovableGO::update( float dt )
 
     if( _position.y <= -40 )
     {
-        _position = glm::vec3( 0, 2, 1 );
+        _position = glm::vec3( 0, 2, 0 );
         _velocity = glm::vec3( 0, 0, 0 );
     }
 }

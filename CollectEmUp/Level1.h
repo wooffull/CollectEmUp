@@ -2,6 +2,7 @@
 
 #include "BlockPlatform.h"
 #include "Collectable.h"
+#include "ExamplePrefabClass.h"
 
 class Level1
 {

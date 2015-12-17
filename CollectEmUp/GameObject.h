@@ -67,6 +67,9 @@ public:
 	virtual float getMass();
 	virtual void setMass( float value );
 
+    virtual float getBrightness();
+    virtual void setBrightness( float value );
+
 	virtual bool getFixed();
 	virtual void setFixed( bool value );
 
@@ -79,8 +82,6 @@ public:
     virtual BoundingBox* getBoundingBox();
 
     virtual bool collidesWith( GameObject* other );
-
-	//virtual void handleCollision( GameObject* other );
 
 	virtual std::string getGameObjType();
 	virtual void setGameObjType(std::string gameObjType);
@@ -101,6 +102,7 @@ protected:
 	float _rotationalVelocity;
 	float _rotationalAcceleration;
 	float _mass;
+    float _brightness;
 	bool _fixed;
 	bool _isSolid;
 	bool _isVisible;
@@ -108,7 +110,6 @@ protected:
 	Model* _model;
 	BoundingBox* _boundingBox;
 	std::string _gameObjType;
-
 
 	GLint _offsetIndex;
 	GLint _scaleIndex;

@@ -15,13 +15,13 @@ GameObject::GameObject() :
     _rotationalVelocity = 0;
     _rotationalAcceleration = 0;
     _mass = 1.0f;
+    _brightness = 0.2f;
     _fixed = false;
     _programIndex = -1;
     _model = nullptr;
 	_isSolid = false;
 	_isVisible = true;
     _boundingBox = new BoundingBox();
-	//_boundingBox->setParentGO(this);
 }
 
 GameObject::~GameObject()
@@ -79,40 +79,30 @@ void GameObject::update( float dt )
 
 void GameObject::draw( float dt )
 {
-	if (_isVisible)
-	{
-		drawShape();
+    if( _isVisible )
+    {
+        drawShape();
 
-		// Draw all nested children
-		auto begin = _children->begin();
-		auto end = _children->end();
-		for (std::vector<GameObject*>::iterator it = begin; it != end; ++it)
-		{
-			(*it)->draw(dt);
-		}
-	}
+        // Draw all nested children
+        auto begin = _children->begin();
+        auto end = _children->end();
+        for( std::vector<GameObject*>::iterator it = begin; it != end; ++it )
+        {
+            ( *it )->draw( dt );
+        }
+    }
 }
 
 void GameObject::drawShape()
 {
-    /*
-    setShaderColor
-    (
-    _programIndex,
-    "color",
-    _color.getRed(),
-    _color.getGreen(),
-    _color.getBlue()
-    );
-    */
-
     if( _model != nullptr )
     {
         glm::mat4 worldMatrix =
             glm::translate( _position ) *
-            glm::scale( _scale ) *
-            glm::rotate( _rotation, _rotationAxis );
+            glm::rotate( _rotation, _rotationAxis ) *
+            glm::scale( _scale );
         setShaderMatrix( _programIndex, "worldMatrix", worldMatrix );
+        setShaderFloat( _programIndex, "brightness", _brightness );
 
         _model->draw();
 
@@ -294,6 +284,16 @@ void GameObject::setMass( float value )
     _mass = value;
 }
 
+float GameObject::getBrightness()
+{
+    return _brightness;
+}
+
+void GameObject::setBrightness( float value )
+{
+    _brightness = value;
+}
+
 bool GameObject::getFixed()
 {
     return _fixed;
@@ -307,7 +307,7 @@ bool GameObject::getSolid()
 {
 	return _isSolid;
 }
-void GameObject::setSolid(bool value)
+void GameObject::setSolid( bool value )
 {
 	_isSolid = value;
 }
@@ -352,27 +352,6 @@ bool GameObject::collidesWith( GameObject* other )
 {
     return _boundingBox->collidesWith( other->getBoundingBox() );
 }
-
-//void GameObject::handleCollision(GameObject* other )
-//{
-//	if (other->getSolid())
-//	{
-//		if (_velocity.y < 0 && _isSolid && _position.y >= other->getPosition().y+other->getBoundingBox()->getHalfWidthY())
-//		{
-//			_velocity.y = 0;
-//			_position.y = other->getPosition().y + other->getBoundingBox()->getHalfWidthY() + _boundingBox->getHalfWidthY();
-//		}
-//	}
-//	else if (other->getGameObjType() == "Collectable" && other->getIsVisible() == true)
-//	{
-//		other->setIsVisible(false);
-//		other->setCollectablesCount(other->getCollectablesCount() += 1);
-//	}
-//	else
-//	{
-//		//Add a condition or two and collectable code might go here.
-//	}
-//}
 
 std::string GameObject::getGameObjType()
 {

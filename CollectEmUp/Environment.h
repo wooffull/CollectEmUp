@@ -45,6 +45,10 @@ private:
     Camera _camera;
     OctTree* _octTree;
     KeyboardMovableGO* _player;
+    GameObject* _skyBox;
+    GameObject* _winPanel;
+    GameObject* _obstacle;
+    float _timeElapsed;
 
     // Should be handled by something like a FollowingCamera
     float _turnAmount;
